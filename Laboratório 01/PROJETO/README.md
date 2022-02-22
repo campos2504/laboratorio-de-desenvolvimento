@@ -1,8 +1,24 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2636
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+# LABORATÓRIO DE DESENVOLVIMENTO DE SOFTWARE
 
-\f0\fs24 \cf0 RAEDME}
+
+**Nataniel Geraldo Mendes Peixoto, nataniel.peixoto@sga.pucminas.br**
+
+**Pedro Campos Miranda, pcmiranda@sga.pucminas.br**
+
+**Izabella de Castro Lucas, iclucas@sga.pucminas.br**
+
+---
+
+_Curso de Engenharia de Software, Unidade Praça da Liberdade_
+
+_Instituto de Informática e Ciências Exatas – Pontifícia Universidade de Minas Gerais (PUC MINAS), Belo Horizonte – MG – Brasil_
+
+
+## Sistema de Matrículas
+
+### Histórias de usuários
+
+| **Eu como...** | **...quero/desejo...** | **...para** |
+| --- | --- | --- |
+|  |  |  |
+
