@@ -20,9 +20,12 @@ _Instituto de Informática e Ciências Exatas – Pontifícia Universidade de Mi
 
 | **Eu como...** | **...quero/desejo...** | **...para** |
 | --- | --- | --- |
-| Como secretaria da universidade | eu desejo gerar o currículo para cada semestre e manter as informações sobre as disciplinas, professores e alunos | para que eu possa ter agilidade e organização na consulta das informações |
-| Como aluno da universidade | eu desejo acessar o sistema para me matricular em disciplinas e/ou para cancelar matrículas feitas anteriormente | para que eu não necessite me deslocar até a universidade |
-| Como aluno da universidade | eu desejo receber notificações com o valor devido da mensalidade | para ser lembrado de realizar o pagamento no próprio aparelho celular |
+| Como secretaria da universidade | eu desejo gerar o currículo para cada semestre | para que as disciplinas possam ficar disponíveis para matrícula |
+| Como secretaria da universidade | eu desejo cadastrar os alunos no sistema | de modo que eles tenham acesso as funcionalidades de matrícula |
+| Como secretaria da universidade | eu desejo manter as informações sobre as disciplinas, professores e alunos | para que eu possa ter agilidade e organização na consulta das informações |
+| Como aluno da universidade | eu desejo acessar o sistema para me matricular | de modo a escolher as disciplinas para cursar no semestre |
+| Como aluno da universidade | eu desejo acessar o sistema para me matricular em disciplinas optativas | para ter flexibilidade na montagem da grade de estudos  |
+| Como aluno da universidade | eu desejo poder cancelar matrículas feitas anteriormente | para que possa adequar a grade de estudos de acordo com minha disponibilidade |
 | Como professora | eu desejo acessar o sistema da universidade | para saber quais são os alunos que estão matriculados em cada disciplina |
 
 
