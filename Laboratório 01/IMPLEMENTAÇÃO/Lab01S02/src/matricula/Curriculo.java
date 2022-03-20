@@ -17,6 +17,7 @@ public class Curriculo {
 
     public Curriculo(long id, String semestre, LocalDateTime inicioMatricula, LocalDateTime fimMatricula,
             Secretaria secretaria) {
+                
         this.id = ID++;
         this.semestre = semestre;
         this.inicioMatricula = inicioMatricula;
@@ -62,6 +63,12 @@ public class Curriculo {
 
     public void setSecretaria(Secretaria secretaria) {
         this.secretaria = secretaria;
+    }
+
+    @Override
+    public String toString() {
+        return "Curriculo [fimMatricula=" + fimMatricula + ", id=" + id + ", inicioMatricula=" + inicioMatricula
+                + ", secretaria=" + secretaria + ", semestre=" + semestre + "]";
     }
     
 
