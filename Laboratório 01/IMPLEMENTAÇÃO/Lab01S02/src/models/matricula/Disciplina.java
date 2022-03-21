@@ -1,10 +1,10 @@
-package matricula;
+package models.matricula;
 
 import java.io.Serializable;
 import java.util.List;
 
-import login.Aluno;
-import login.Professor;
+import models.usuarios.Aluno;
+import models.usuarios.Professor;
 
 public  class Disciplina  implements Serializable{
     

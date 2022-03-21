@@ -1,13 +1,14 @@
+package view;
 
 import java.util.Scanner;
 
-import dados.Data;
-import login.Aluno;
-import login.Professor;
-import matricula.Curso;
-import matricula.Curriculo;
-import matricula.Disciplina;
-import login.Secretaria;
+import models.matricula.Curriculo;
+import models.matricula.Curso;
+import models.matricula.Disciplina;
+import models.usuarios.Aluno;
+import models.usuarios.Professor;
+import models.usuarios.Secretaria;
+import repository.DataRepository;
 
 public class MenuSecretaria extends Menu {
 
@@ -31,7 +32,7 @@ public class MenuSecretaria extends Menu {
     }
 
     public static void opcoesDaSecretaria(Scanner teclado, Secretaria secretaria)  {
-        Data dados = secretaria.getDados();
+        DataRepository dados = secretaria.getDados();
         int opcao = -1;
         do {
             opcao = menuSecretaria(teclado);
@@ -94,7 +95,7 @@ public class MenuSecretaria extends Menu {
 
     }
 
-    private static void atualizarAluno(Scanner teclado, Data dados) {
+    private static void atualizarAluno(Scanner teclado, DataRepository dados) {
         System.out.println("Editar aluno");
         String nome, email, senha;
 
@@ -111,7 +112,7 @@ public class MenuSecretaria extends Menu {
         aluno.setSenha(senha);
     }
 
-    private static Aluno selecionarAluno(Data dados, Scanner in) throws RuntimeException {
+    private static Aluno selecionarAluno(DataRepository dados, Scanner in) throws RuntimeException {
 
         if (dados.getAlunos().size() == 0)
             throw new RuntimeException("Nao existem professores cadastrados");
@@ -130,14 +131,14 @@ public class MenuSecretaria extends Menu {
 
     }
 
-    private static void removerAluno(Scanner teclado, Data dados) throws RuntimeException {
+    private static void removerAluno(Scanner teclado, DataRepository dados) throws RuntimeException {
         Aluno aluno=selecionarAluno(dados,teclado);
         dados.getAlunos().remove(aluno);
         System.out.println("Aluno removido");
 
     }
 
-    private static void consultaAluno(Data dados) throws RuntimeException {
+    private static void consultaAluno(DataRepository dados) throws RuntimeException {
         if (dados.getAlunos().size() == 0)
             throw new RuntimeException("Não possui nenhum aluno matriculado até o momento!");
 
@@ -145,7 +146,7 @@ public class MenuSecretaria extends Menu {
 
     }
 
-    private static void adicionarAluno(Scanner teclado, Data dados) {
+    private static void adicionarAluno(Scanner teclado, DataRepository dados) {
         limparTela();
         String nome;
         String email;
@@ -161,7 +162,7 @@ public class MenuSecretaria extends Menu {
         System.out.println("Aluno adicionado com sucesso");
     }
 
-    private static void adicionarProfessor(Scanner teclado, Data dados) {
+    private static void adicionarProfessor(Scanner teclado, DataRepository dados) {
         limparTela();
         String nome;
         String email;
@@ -176,7 +177,7 @@ public class MenuSecretaria extends Menu {
         dados.addProfessor(new Professor(nome, email, senha));
     }
 
-    private static void adicionarDisciplina(Scanner teclado, Data dados) throws RuntimeException {
+    private static void adicionarDisciplina(Scanner teclado, DataRepository dados) throws RuntimeException {
         limparTela();
         String nome;
         String resp;
@@ -199,7 +200,7 @@ public class MenuSecretaria extends Menu {
         professor.addDisciplina(disciplina);
     }
 
-    private static Professor selecionarProfessor(Data dados, Scanner in) throws RuntimeException {
+    private static Professor selecionarProfessor(DataRepository dados, Scanner in) throws RuntimeException {
 
         if (dados.getProfessores().size() == 0)
             throw new RuntimeException("Nao existem professores cadastrados");
@@ -217,7 +218,7 @@ public class MenuSecretaria extends Menu {
 
     }
 
-    private static Curso selecionarCurso(Data dados, Scanner in) throws RuntimeException {
+    private static Curso selecionarCurso(DataRepository dados, Scanner in) throws RuntimeException {
 
         if (dados.getCursos().size() == 0)
             throw new RuntimeException("Nao existem cursos cadastrados");
@@ -235,7 +236,7 @@ public class MenuSecretaria extends Menu {
 
     }
 
-    private static void adicionarCurso(Scanner teclado, Data dados){
+    private static void adicionarCurso(Scanner teclado, DataRepository dados){
 
         limparTela();
         String nome;
@@ -250,7 +251,7 @@ public class MenuSecretaria extends Menu {
         dados.addCurso(curso);
     }
 
-    private static void cadastrarCurriculo(Scanner teclado, Data dados) {
+    private static void cadastrarCurriculo(Scanner teclado, DataRepository dados) {
 
         limparTela();
         String semestre;
@@ -260,7 +261,7 @@ public class MenuSecretaria extends Menu {
         dados.addCurriculo(new Curriculo(semestre));
     }
 
-    private static Curriculo selecionarCurriculo(Data dados, Scanner in) throws RuntimeException {
+    private static Curriculo selecionarCurriculo(DataRepository dados, Scanner in) throws RuntimeException {
 
         if (dados.getCurriculos().size() == 0)
             throw new RuntimeException("Nao existem cursos cadastrados");

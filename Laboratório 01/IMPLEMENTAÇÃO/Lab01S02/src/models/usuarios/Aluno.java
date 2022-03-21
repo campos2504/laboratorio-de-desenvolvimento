@@ -1,10 +1,10 @@
-package login;
+package models.usuarios;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import matricula.Disciplina;
+import models.matricula.Disciplina;
 
 public class Aluno implements ICadastravel, Serializable {
 

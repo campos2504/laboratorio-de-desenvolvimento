@@ -1,3 +1,4 @@
+package view;
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,17 +9,17 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import dados.Data;
-import login.Aluno;
-import login.Professor;
-import login.Secretaria;
+import models.usuarios.Aluno;
+import models.usuarios.Professor;
+import models.usuarios.Secretaria;
+import repository.DataRepository;
 
 public class MenuSistema extends Menu {
 
-    private static Data cadastroDeDados() {
+    private static DataRepository cadastroDeDados() {
 
         System.out.println("Cadastrando dados login padrão....");
-        Data baseDados = new Data();
+        DataRepository baseDados = new DataRepository();
         Secretaria loginPadrao = new Secretaria("SecretariaPadrao", "secretaria@puc.com", "123", baseDados);
         baseDados.addSecretaria(loginPadrao);
         System.out.println("Secretaria padrão criada!");
@@ -33,11 +34,11 @@ public class MenuSistema extends Menu {
 
     }
 
-    public static void gravarDados(Data dados) throws IOException {
+    public static void gravarDados(DataRepository dados) throws IOException {
 
         System.out.println("Gravando........");
         ObjectOutputStream arquivoSaida = new ObjectOutputStream(
-                new FileOutputStream("src/dados/baseDadosUniversidade.bin"));
+                new FileOutputStream("baseDadosUniversidade.bin"));
 
         arquivoSaida.writeObject(dados);
 
@@ -46,16 +47,16 @@ public class MenuSistema extends Menu {
 
     }
 
-    public static ArrayList<Data> lerBaseDados() {
+    public static ArrayList<DataRepository> lerBaseDados() {
 
-        ArrayList<Data> dados = new ArrayList<>();
-        Data leitura;
+        ArrayList<DataRepository> dados = new ArrayList<>();
+        DataRepository leitura;
         ObjectInputStream arquivoEntrada;
         System.out.println("Acessando Dados........");
         try {
-            arquivoEntrada = new ObjectInputStream(new FileInputStream("src/dados/baseDadosUniversidade.bin"));
+            arquivoEntrada = new ObjectInputStream(new FileInputStream("baseDadosUniversidade.bin"));
             do {
-                leitura = (Data) arquivoEntrada.readObject();
+                leitura = (DataRepository) arquivoEntrada.readObject();
                 if (leitura != null) {
                     dados.add(leitura);
                 }
@@ -78,7 +79,7 @@ public class MenuSistema extends Menu {
 
     public static void menuSistema(Scanner teclado) {
 
-        Data baseDados = lerBaseDados().get(0);
+        DataRepository baseDados = lerBaseDados().get(0);
         String email ;
         String senha ;
         int opt;

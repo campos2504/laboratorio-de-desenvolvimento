@@ -1,4 +1,4 @@
-package matricula;
+package models.matricula;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,9 +1,10 @@
+package view;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import login.Professor;
-import matricula.Disciplina;
+import models.matricula.Disciplina;
+import models.usuarios.Professor;
 
 public class MenuProfessor extends Menu {
 

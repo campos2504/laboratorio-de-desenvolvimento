@@ -1,9 +1,10 @@
+package view;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import dados.Data;
-import login.Aluno;
-import matricula.Disciplina;
+import models.matricula.Disciplina;
+import models.usuarios.Aluno;
+import repository.DataRepository;
 
 public class MenuAluno extends Menu {
 
@@ -21,7 +22,7 @@ public class MenuAluno extends Menu {
         return opcao;
     }
 
-    public static void opcoesDoAluno(Scanner teclado, Aluno aluno, Data dados) throws InputMismatchException {
+    public static void opcoesDoAluno(Scanner teclado, Aluno aluno, DataRepository dados) throws InputMismatchException {
         int opcao = -1;
         do {
             opcao = menuAluno(teclado);
@@ -53,7 +54,7 @@ public class MenuAluno extends Menu {
 
     }
 
-    private static void matricularDisciplinaObrigatoria(Aluno aluno, Data dados, Scanner teclado)
+    private static void matricularDisciplinaObrigatoria(Aluno aluno, DataRepository dados, Scanner teclado)
             throws RuntimeException {
 
         int op = -1;
@@ -80,7 +81,7 @@ public class MenuAluno extends Menu {
         }
     }
 
-    private static void matricularDisciplinaOptativa(Aluno aluno, Data dados, Scanner teclado)
+    private static void matricularDisciplinaOptativa(Aluno aluno, DataRepository dados, Scanner teclado)
             throws RuntimeException {
 
         int op = -1;

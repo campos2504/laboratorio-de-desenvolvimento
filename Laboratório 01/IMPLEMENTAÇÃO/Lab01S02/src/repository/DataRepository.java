@@ -1,18 +1,17 @@
-package dados;
+package repository;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import login.Aluno;
-import login.Professor;
-import login.Secretaria;
-import login.ICadastravel;
-import matricula.Curriculo;
-import matricula.Curso;
-import matricula.Disciplina;
+import models.matricula.Curriculo;
+import models.matricula.Curso;
+import models.matricula.Disciplina;
+import models.usuarios.Aluno;
+import models.usuarios.Professor;
+import models.usuarios.Secretaria;
 
-public class Data implements Serializable {
+public class DataRepository implements Serializable {
 
     public static final long serialVersionUID = 1L;
 
@@ -23,21 +22,23 @@ public class Data implements Serializable {
     private List<Curriculo> curriculos;
     private List<Curso> listaCursos;
 
-    public Data() {
+    public DataRepository() {
 
         this.alunos = new ArrayList<>();
         this.secretarias = new ArrayList<>();
         this.professores = new ArrayList<>();
         this.disciplinas = new ArrayList<>();
         this.curriculos = new ArrayList<>();
-        this.listaCursos= new ArrayList<>();
-        
+        this.listaCursos = new ArrayList<>();
+
     }
+
+    // #region Crud Aluno
 
     public void addAluno(Aluno aluno) {
         this.alunos.add(aluno);
     }
-    
+
     public void removerAluno(long alunoId) {
         int index = -1;
         for (Aluno aluno : alunos) {
@@ -50,54 +51,44 @@ public class Data implements Serializable {
             this.alunos.remove(index);
     }
 
-    public static long getSerialversionuid() {
-        return serialVersionUID;
-    }
-
     public List<Aluno> getAlunos() {
         return alunos;
     }
 
-    public void setAlunos(List<Aluno> alunos) {
-        this.alunos = alunos;
-    }
+    // #endregion
+
+    // #region Crud Secretaria
 
     public List<Secretaria> getSecretarias() {
         return secretarias;
     }
 
-    public void setSecretarias(List<Secretaria> secretarias) {
-        this.secretarias = secretarias;
+    public void addSecretaria(Secretaria secretaria) {
+        this.secretarias.add(secretaria);
     }
 
+    public void removerSecretaria(long secretariaId) {
+        int index = -1;
+        for (Secretaria secretaria : this.secretarias) {
+            if (secretariaId == secretaria.getId()) {
+                index = this.secretarias.indexOf(secretaria);
+                break;
+            }
+        }
+        if (index != -1)
+            this.secretarias.remove(index);
+    }
+
+    // #endregion
+
+    //#region Crud Professor
     public List<Professor> getProfessores() {
         return professores;
     }
-
-    public void setProfessores(List<Professor> professores) {
-        this.professores = professores;
-    }
-
-    public List<Disciplina> getDisciplinas() {
-        return disciplinas;
-    }
-
-    public void setDisciplinas(List<Disciplina> disciplinas) {
-        this.disciplinas = disciplinas;
-    }
-
-    public List<Curriculo> getCurriculos() {
-        return curriculos;
-    }
-
-    public void setCurriculos(List<Curriculo> curriculos) {
-        this.curriculos = curriculos;
-    }
-
     public void addProfessor(Professor professor) {
         this.professores.add(professor);
     }
-    
+
     public void removerProfessor(long professorId) {
         int index = -1;
         for (Professor professor : this.professores) {
@@ -109,7 +100,13 @@ public class Data implements Serializable {
         if (index != -1)
             this.professores.remove(index);
     }
-     
+    //#endregion
+   
+    //#region Crud Disciplina
+    public List<Disciplina> getDisciplinas() {
+        return disciplinas;
+    }
+
     public void addDisciplina(Disciplina disciplina) {
         this.disciplinas.add(disciplina);
     }
@@ -125,6 +122,13 @@ public class Data implements Serializable {
         if (index != -1)
             this.disciplinas.remove(index);
     }
+    //#endregion
+
+    //#region Crud Curriculo
+
+    public List<Curriculo> getCurriculos() {
+        return curriculos;
+    }  
 
     public void addCurriculo(Curriculo curriculo) {
         this.curriculos.add(curriculo);
@@ -141,42 +145,19 @@ public class Data implements Serializable {
         if (index != -1)
             this.curriculos.remove(index);
     }
-    
 
-    public void addSecretaria(Secretaria secretaria ) {
-        this.secretarias.add(secretaria);
-    }
+    //#endregion
 
-    public void removerSecretaria(long secretariaId) {
-        int index = -1;
-        for (Secretaria secretaria : this.secretarias) {
-            if (secretariaId == secretaria.getId()) {
-                index = this.secretarias.indexOf(secretaria);
-                break;
-            }
-        }
-        if (index != -1)
-            this.secretarias.remove(index);
-    }
-
-    public void addCurso(Curso curso) {
-        this.listaCursos.add(curso);
-    }   
-
-
-    public List<ICadastravel> usuarios() {
-
-        List<ICadastravel>  cadastros = new ArrayList<>();
-        cadastros.addAll(this.alunos);
-        cadastros.addAll(this.professores);
-        cadastros.addAll(this.secretarias);
-        return cadastros;
-    }
-
+    //#region Crud Curso
     public List<Curso> getCursos() {
         return listaCursos;
     }
 
+    public void addCurso(Curso curso) {
+        this.listaCursos.add(curso);
+    }
 
+    //#endregion
+    
 
 }

@@ -1,12 +1,11 @@
-package login;
+package models.usuarios;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import matricula.Disciplina;
+import repository.DataRepository;
 
-public class Professor implements ICadastravel, Serializable {
+
+public class Secretaria implements ICadastravel, Serializable {
 
     public static final long serialVersionUID = 1L;
 
@@ -16,25 +15,20 @@ public class Professor implements ICadastravel, Serializable {
     private String email;
     private String senha;
     private TipoUsuario tipoUsuario;
+    private DataRepository dataRepository;
 
-    private List<Disciplina> disciplinas;
 
-    public Professor(String nome, String email, String senha) {
+    public Secretaria(String nome, String email, String senha, DataRepository dataRepository) {
         this.id = ID++;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
-        this.tipoUsuario = TipoUsuario.PROFESSOR;
-        this.disciplinas = new ArrayList<>();
-
+        this.tipoUsuario = TipoUsuario.SECRETARIA;
+        this.dataRepository = dataRepository;
     }
 
-    public Professor() {
-
-    }
-
-    public String listarAlunos() {
-        return null;
+    public Secretaria(){
+        
     }
 
     @Override
@@ -51,6 +45,7 @@ public class Professor implements ICadastravel, Serializable {
     public TipoUsuario getTipoUsuario() {
         return this.tipoUsuario;
     }
+
 
     public Long getId() {
         return id;
@@ -80,18 +75,11 @@ public class Professor implements ICadastravel, Serializable {
         this.senha = senha;
     }
 
-    public List<Disciplina> getDisciplinas() {
-        return disciplinas;
+    public DataRepository getDados() {
+        return this.dataRepository;
     }
 
-    @Override
-    public String toString() {
-        return "Professor [" + " id=" + id + ", nome=" + nome + ", email=" + email +
-                ", tipoUsuario=" + tipoUsuario  +"]";
-    }
 
-    public void addDisciplina(Disciplina disciplina) {
-        this.disciplinas.add(disciplina);
-    }
 
 }
+
