@@ -89,7 +89,7 @@ public class Aluno implements ICadastravel, Serializable {
     @Override
     public String toString() {
         return "Aluno [id=" + id + ", nome=" + nome
-        + ", tipoUsuario=" + tipoUsuario + ", email=" + email + ", disciplinas=" + disciplinas + " ]";
+        + ", tipoUsuario=" + tipoUsuario + ", email=" + email + " ]";
     }
 
 }

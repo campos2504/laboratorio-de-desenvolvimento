@@ -59,10 +59,11 @@ public class MenuAluno extends Menu {
 
         int op = -1;
         int aux;
+        int i=0;
         System.out.println("Selecione a disciplina que você quer cursar");
 
         // Escolha de quatros disciplinas obrigatórias
-        for (int i = 0; i < 4; i++) {
+        do {
             op=-1;
             aux=dados.getCurriculos().size()-1;
 
@@ -76,22 +77,24 @@ public class MenuAluno extends Menu {
             System.out.println("Digite a opção escolhida da disciplina");
             aux = teclado.nextInt();
 
-            aluno.matricular(dados.getDisciplinas().get(aux));
+            Disciplina disciplina = dados.getDisciplinas().get(aux);
 
-        }
+            aluno.matricular(disciplina);
+            disciplina.addAluno(aluno);
+
+        }while(i<=4);
     }
 
     private static void matricularDisciplinaOptativa(Aluno aluno, DataRepository dados, Scanner teclado)
             throws RuntimeException {
 
         int op = -1;
-        int aux = -1;
-        int numMaterias = 0;
+        int aux=dados.getCurriculos().size()-1;
         System.out.println("Selecione a disciplina que você quer cursar");
 
         // Escolha de até disciplinas obrigatórias
-        do {
-            for (Disciplina disciplina : dados.getCurriculos().get(op).getDisciplinas()) {
+            op=-1;
+            for (Disciplina disciplina : dados.getCurriculos().get(aux).getDisciplinas()) {
                 op++;
                 if (disciplina.getObrigatoria() == false
                         && disciplina.getCurriculo().getMatriculaAberta() == true) {
@@ -100,20 +103,36 @@ public class MenuAluno extends Menu {
             }
             teclado.nextLine();
             System.out.println("Digite a opção escolhida da disciplina");
-            aux = teclado.nextInt();
+            op = teclado.nextInt();
 
-            aluno.matricular(dados.getDisciplinas().get(aux));
+            Disciplina disciplina2=dados.getDisciplinas().get(aux);
+
+            aluno.matricular(disciplina2);
+            disciplina2.addAluno(aluno);
 
             System.out.println("Deseja matricular em mais uma disciplina? 1 - Sim / 2 - Não");
             aux = teclado.nextInt();
 
             if (aux == 1) {
-                numMaterias++;
-            } else {
-                numMaterias = 0;
+                op=-1;
+            for (Disciplina disciplina : dados.getCurriculos().get(aux).getDisciplinas()) {
+                op++;
+                if (disciplina.getObrigatoria() == false
+                        && disciplina.getCurriculo().getMatriculaAberta() == true) {
+                    System.out.println("Opcão: " + op + " " + disciplina);
+                }
+            }
+            teclado.nextLine();
+            System.out.println("Digite a opção escolhida da disciplina");
+            op = teclado.nextInt();
+
+            disciplina2=dados.getDisciplinas().get(aux);
+
+            aluno.matricular(disciplina2);
+            disciplina2.addAluno(aluno);
+                
             }
 
-        } while (aux != 0);
 
     }
 

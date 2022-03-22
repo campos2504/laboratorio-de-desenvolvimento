@@ -20,7 +20,7 @@ public class MenuSistema extends Menu {
 
         System.out.println("Cadastrando dados login padrão....");
         DataRepository baseDados = new DataRepository();
-        Secretaria loginPadrao = new Secretaria("SecretariaPadrao", "secretaria@puc.com", "123", baseDados);
+        Secretaria loginPadrao = new Secretaria("SecretariaPadrao", "adm@adm", "123", baseDados);
         baseDados.addSecretaria(loginPadrao);
         System.out.println("Secretaria padrão criada!");
 

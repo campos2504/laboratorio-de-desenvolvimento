@@ -48,7 +48,7 @@ public class Curriculo implements Serializable{
     @Override
     public String toString() {
         return "Curriculo [" + "id=" + id +", semestre=" + semestre + ", matriculaAberta=" + matriculaAberta
-                +  ", semestreAtual=" + semestreAtual + disciplinas + "]";
+                +  ", semestreAtual=" + semestreAtual+"]";
     }
 
 

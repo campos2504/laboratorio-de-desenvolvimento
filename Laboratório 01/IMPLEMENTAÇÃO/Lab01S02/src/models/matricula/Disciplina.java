@@ -1,6 +1,7 @@
 package models.matricula;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import models.usuarios.Aluno;
@@ -18,38 +19,49 @@ public  class Disciplina  implements Serializable{
     private long id;
     private String nome;
     private Curso curso;
-    private boolean ativo;
     private List<Aluno> alunos;
     private Curriculo curriculo;
     private Professor professor;
     private boolean obrigatoria ;
+    private boolean ativa;
     
     public Disciplina(String nome, Curso curso,  Curriculo curriculo,
             Professor professor, boolean obrigatoria) {
         this.id = ID++;
         this.nome = nome;
         this.curso = curso;
-        this.ativo = false;
         this.curriculo = curriculo;
         this.professor = professor;
         this.obrigatoria = obrigatoria;
+        this.alunos=new ArrayList<>();
+        this.ativa = true;
     }
 
-    public boolean isAtivo() {
-        return ativo;
+    public void desativar(){
+        ativa=false;
+    }
+    public boolean getAtiva(){
+        return this.ativa;
     }
 
     public boolean isObrigatoria() {
         return obrigatoria;
     }
 
-    public void ativar(){
-        this.ativo=true;
-
+    public boolean temMinimo(){
+        if(alunos.size()>=MIN_ALUNOS){
+            return true;
+        }
+        return false;
     }
 
-    public void addAluno(Aluno aluno) {
+    public boolean addAluno(Aluno aluno) {
+        if(alunos.size()==MAX_ALUNOS){
+            System.out.println("Turma cheia");
+            return false;
+        }
         this.addAluno(aluno);
+        return true;
     }
     
     public static int getMinAlunos() {
@@ -100,7 +112,7 @@ public  class Disciplina  implements Serializable{
 
     @Override
     public String toString() {
-        return "Disciplina [ativo=" + ativo + ", curriculo=" + curriculo + ", curso=" + curso
+        return "Disciplina [" + " curriculo=" + curriculo + ", curso=" + curso
                 + ", id=" + id + ", nome=" + nome + ", obrigatoria=" + obrigatoria + ", professor=" + professor +"]";
     }
   
