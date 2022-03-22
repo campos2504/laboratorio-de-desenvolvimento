@@ -38,7 +38,7 @@ public class MenuSistema extends Menu {
         baseDados.addCurriculo(curriculo);
         String string1, string2, string3;
         Disciplina disciplina1, disciplina2, disciplina3;
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 3; i++) {
             string1="TIS "+i;
             string2="Optativa "+i;
             string3="Calculo"+i;
