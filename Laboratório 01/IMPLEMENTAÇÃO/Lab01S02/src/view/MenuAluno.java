@@ -111,9 +111,9 @@ public class MenuAluno extends Menu {
             disciplina2.addAluno(aluno);
 
             System.out.println("Deseja matricular em mais uma disciplina? 1 - Sim / 2 - Não");
-            aux = teclado.nextInt();
+            int aux2 = teclado.nextInt();
 
-            if (aux == 1) {
+            if (aux2 == 1) {
                 op=-1;
             for (Disciplina disciplina : dados.getCurriculos().get(aux).getDisciplinas()) {
                 op++;

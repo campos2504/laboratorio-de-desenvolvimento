@@ -60,7 +60,7 @@ public  class Disciplina  implements Serializable{
             System.out.println("Turma cheia");
             return false;
         }
-        this.addAluno(aluno);
+        this.alunos.add(aluno);
         return true;
     }
     

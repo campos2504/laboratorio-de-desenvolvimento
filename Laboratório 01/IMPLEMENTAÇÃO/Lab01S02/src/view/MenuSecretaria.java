@@ -125,7 +125,6 @@ public class MenuSecretaria extends Menu {
         System.out.println("Editar aluno");
         String nome, email, senha;
 
-        teclado.nextLine();
         Aluno aluno = selecionarAluno(dados, teclado);
         System.out.println("Atualize o nome");
         nome = teclado.nextLine();
@@ -141,7 +140,7 @@ public class MenuSecretaria extends Menu {
     private static Aluno selecionarAluno(DataRepository dados, Scanner in) throws RuntimeException {
 
         if (dados.getAlunos().size() == 0)
-            throw new RuntimeException("Nao existem professores cadastrados");
+            throw new RuntimeException("Nao existem alunos cadastrados");
 
         int op = -1;
         System.out.println("Selecione um dos professores da lista");
@@ -221,6 +220,9 @@ public class MenuSecretaria extends Menu {
             throw new RuntimeException("Nao existem professor para selecionar");
         Professor professor = selecionarProfessor(dados, teclado);
         boolean obrigatoria = true;
+
+        teclado.nextLine();
+        
         System.out.println("A disciplina é opcional? S/N");
         resp = teclado.nextLine();
         if (resp.equals("S"))
