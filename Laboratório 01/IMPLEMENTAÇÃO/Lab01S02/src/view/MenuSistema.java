@@ -9,6 +9,9 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import models.matricula.Curriculo;
+import models.matricula.Curso;
+import models.matricula.Disciplina;
 import models.usuarios.Aluno;
 import models.usuarios.Professor;
 import models.usuarios.Secretaria;
@@ -20,7 +23,41 @@ public class MenuSistema extends Menu {
 
         System.out.println("Cadastrando dados login padrão....");
         DataRepository baseDados = new DataRepository();
-        Secretaria loginPadrao = new Secretaria("SecretariaPadrao", "adm@adm", "123", baseDados);
+        Secretaria loginPadrao = new Secretaria("SecretariaPadrao", "sec@gmail.com", "123", baseDados);
+        Professor professor = new Professor("Carlos", "carlos@gmail.com", "123");
+        baseDados.addProfessor(professor);
+        Professor professor2 = new Professor("Ana", "ana@gmail.com", "123");
+        baseDados.addProfessor(professor2);
+        Professor professor3 = new Professor("Antonio", "tonho@gmail.com", "123");
+        baseDados.addProfessor(professor3);
+        Curso curso = new Curso("Engenharia", 100);
+        baseDados.addCurso(curso);
+        Curso curso2 = new Curso("Compputacao", 120);
+        baseDados.addCurso(curso2);
+        Curriculo curriculo = new Curriculo("2022/2");
+        baseDados.addCurriculo(curriculo);
+        String string1, string2, string3;
+        Disciplina disciplina1, disciplina2, disciplina3;
+        for (int i = 0; i < 6; i++) {
+            string1="TIS "+i;
+            string2="Optativa "+i;
+            string3="Calculo"+i;
+            disciplina1=new Disciplina(string2, curso, curriculo, professor2, true);
+            disciplina2= new Disciplina(string1, curso, curriculo, professor, false);
+            disciplina3 = new Disciplina(string3, curso2, curriculo, professor3, true);
+            curriculo.addDisciplina(disciplina1);
+            baseDados.addDisciplina(disciplina1);
+            curriculo.addDisciplina(disciplina2);
+            baseDados.addDisciplina(disciplina2);
+            curriculo.addDisciplina(disciplina3);
+            baseDados.addDisciplina(disciplina3);     
+        }
+        for (int i = 0; i < 60; i++) {
+            string1="User"+i;
+            string2="user"+i+"@gmail.com";
+            baseDados.addAluno(new Aluno(string1, string2, "123"));
+        }
+        
         baseDados.addSecretaria(loginPadrao);
         System.out.println("Secretaria padrão criada!");
 
