@@ -76,13 +76,14 @@ public class MenuAluno extends Menu {
             teclado.nextLine();
             System.out.println("Digite a opção escolhida da disciplina");
             aux = teclado.nextInt();
+            i++;
 
             Disciplina disciplina = dados.getDisciplinas().get(aux);
 
             aluno.matricular(disciplina);
             disciplina.addAluno(aluno);
 
-        }while(i<=4);
+        }while(i<4);
     }
 
     private static void matricularDisciplinaOptativa(Aluno aluno, DataRepository dados, Scanner teclado)

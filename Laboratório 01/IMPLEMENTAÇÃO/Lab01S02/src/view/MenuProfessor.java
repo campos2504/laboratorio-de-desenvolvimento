@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import models.matricula.Disciplina;
+import models.usuarios.Aluno;
 import models.usuarios.Professor;
 
 public class MenuProfessor extends Menu {
@@ -49,7 +50,13 @@ public class MenuProfessor extends Menu {
         if (disciplinas.size() == 0)
             throw new IllegalCallerException("Esse professor não leciona nenhuma disciplina no momento!");
 
-        disciplinas.stream().forEach(System.out::println);
+        for (Disciplina disciplina : disciplinas) {
+            System.out.println(disciplina.toString());
+            for (Aluno aluno : disciplina.getAlunos()) {
+                System.out.println(aluno);
+            }
+            
+        }
 
     }
 

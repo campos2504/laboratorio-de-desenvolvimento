@@ -43,8 +43,11 @@ public class MenuSistema extends Menu {
             string2="Optativa "+i;
             string3="Calculo"+i;
             disciplina1=new Disciplina(string2, curso, curriculo, professor2, true);
+            professor2.addDisciplina(disciplina1);
             disciplina2= new Disciplina(string1, curso, curriculo, professor, false);
+            professor.addDisciplina(disciplina2);
             disciplina3 = new Disciplina(string3, curso2, curriculo, professor3, true);
+            professor3.addDisciplina(disciplina3);
             curriculo.addDisciplina(disciplina1);
             baseDados.addDisciplina(disciplina1);
             curriculo.addDisciplina(disciplina2);
