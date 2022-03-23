@@ -167,7 +167,11 @@ public class MenuSecretaria extends Menu {
         if (dados.getAlunos().size() == 0)
             throw new RuntimeException("Não possui nenhum aluno matriculado até o momento!");
 
-        System.out.println(dados.getAlunos());
+            for (Aluno aluno : dados.getAlunos()) {
+                System.out.println(aluno);
+                
+            }
+
 
     }
 

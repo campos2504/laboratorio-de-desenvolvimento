@@ -112,8 +112,8 @@ public  class Disciplina  implements Serializable{
 
     @Override
     public String toString() {
-        return "Disciplina [" + " curriculo=" + curriculo + ", curso=" + curso
-                + ", id=" + id + ", nome=" + nome + ", obrigatoria=" + obrigatoria + ", professor=" + professor +"]";
+        return "Disciplina ["+ curso.getNome() + " curriculo=" + curriculo.getSemestre() + ", curso=" 
+                +", nome=" + nome + ", obrigatoria=" + obrigatoria + ", professor=" + professor.getNome() +"]";
     }
   
 

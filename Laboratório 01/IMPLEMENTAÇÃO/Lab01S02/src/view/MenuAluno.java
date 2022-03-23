@@ -14,7 +14,7 @@ public class MenuAluno extends Menu {
         System.out.println("==========================");
         System.out.println("1 - Matricular em disciplina obrigatória");
         System.out.println("2 - Matricular em disciplina optativa");
-        System.out.println("3 - Cancelar Matricula de disciplina");
+        System.out.println("3 -Imprimir Matriculas de disciplina");
         System.out.println("0 - Sair");
 
         int opcao = teclado.nextInt();
@@ -40,18 +40,21 @@ public class MenuAluno extends Menu {
                     pausa(teclado);
                     break;
                 case 3:
-                    try {
 
-                    } catch (IllegalCallerException e) {
-                        System.out.println(e.getMessage());
-
-                    }
+                ImprimirMatricula(aluno);
 
                     pausa(teclado);
                     break;
             }
         } while (opcao != 0);
 
+    }
+
+    private static void ImprimirMatricula(Aluno aluno) {
+        for (Disciplina disciplina : aluno.getDisciplinas()) {
+            System.out.println(disciplina);
+            
+        }
     }
 
     private static void matricularDisciplinaObrigatoria(Aluno aluno, DataRepository dados, Scanner teclado)
@@ -66,7 +69,13 @@ public class MenuAluno extends Menu {
         do {
             op=-1;
             aux=dados.getCurriculos().size()-1;
+            limparTela();
 
+            if(dados.getCurriculos().get(aux).getDisciplinas().size()==0){
+                System.out.println("nao tem dsciplinas para matricular");
+                return;
+
+            }
             for (Disciplina disciplina : dados.getCurriculos().get(aux).getDisciplinas()) {
                 op++;
                 if (disciplina.getObrigatoria() == true && disciplina.getCurriculo().getMatriculaAberta() == true) {
@@ -89,9 +98,16 @@ public class MenuAluno extends Menu {
     private static void matricularDisciplinaOptativa(Aluno aluno, DataRepository dados, Scanner teclado)
             throws RuntimeException {
 
+                
+
         int op = -1;
         int aux=dados.getCurriculos().size()-1;
         System.out.println("Selecione a disciplina que você quer cursar");
+        if(dados.getCurriculos().get(aux).getDisciplinas().size()==0){
+            System.out.println("nao tem dsciplinas para matricular");
+            return;
+
+        }
 
         // Escolha de até disciplinas obrigatórias
             op=-1;

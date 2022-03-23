@@ -52,7 +52,9 @@ public class MenuProfessor extends Menu {
 
         for (Disciplina disciplina : disciplinas) {
             System.out.println(disciplina.toString());
+            System.out.println();
             for (Aluno aluno : disciplina.getAlunos()) {
+                System.out.println();
                 System.out.println(aluno);
             }
             

@@ -140,11 +140,16 @@ public class MenuSistema extends Menu {
             limparTela();
             teclado.nextLine();
 
-            System.out.print("Digite seus email: ");
+
+            if(opt!=0){
+                System.out.print("Digite seus email: ");
             email = teclado.nextLine();
 
             System.out.print("Digite sua senha: ");
             senha = teclado.nextLine();
+
+            }
+            
             limparTela();
 
             switch (opt) {

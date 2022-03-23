@@ -86,8 +86,7 @@ public class Professor implements ICadastravel, Serializable {
 
     @Override
     public String toString() {
-        return "Professor [" + " id=" + id + ", nome=" + nome + ", email=" + email +
-                ", tipoUsuario=" + tipoUsuario  +"]";
+        return "Professor [" + "id=" + id + ", nome=" + nome + ", email=" + email +"]";
     }
 
     public void addDisciplina(Disciplina disciplina) {
