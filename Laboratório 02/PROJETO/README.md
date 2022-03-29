@@ -14,7 +14,7 @@ _Curso de Engenharia de Software, Unidade Praça da Liberdade_
 _Instituto de Informática e Ciências Exatas – Pontifícia Universidade de Minas Gerais (PUC MINAS), Belo Horizonte – MG – Brasil_
 
 
-## Sistema de Matrículas
+## Sistema de Aluguel de Carros
 
 ### Histórias de usuários
 
