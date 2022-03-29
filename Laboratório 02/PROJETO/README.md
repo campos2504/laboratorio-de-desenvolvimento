@@ -20,13 +20,12 @@ _Instituto de Informática e Ciências Exatas – Pontifícia Universidade de Mi
 
 | **Eu como...** | **...quero/desejo...** | **...para** |
 | --- | --- | --- |
-| Como secretaria da universidade | eu desejo gerar o currículo para cada semestre | para que as disciplinas possam ficar disponíveis para matrícula |
-| Como secretaria da universidade | eu desejo cadastrar os alunos no sistema | de modo que eles tenham acesso as funcionalidades de matrícula |
-| Como secretaria da universidade | eu desejo manter as informações sobre as disciplinas, professores e alunos | para que eu possa ter agilidade e organização na consulta das informações |
-| Como aluno da universidade | eu desejo acessar o sistema para me matricular | de modo a escolher as disciplinas para cursar no semestre |
-| Como aluno da universidade | eu desejo acessar o sistema para me matricular em disciplinas optativas | para ter flexibilidade na montagem da grade de estudos  |
-| Como aluno da universidade | eu desejo poder cancelar matrículas feitas anteriormente | para que possa adequar a grade de estudos de acordo com minha disponibilidade |
-| Como professora | eu desejo acessar o sistema da universidade | para saber quais são os alunos que estão matriculados em cada disciplina |
+| Como cliente | Eu desejo introduzir, modificar, consultar e cancelar pedidos de aluguel | Para que eu possa ter mais autonomia na minha escolha do aluguel de carro |
+| Como cliente | Eu desejo alugar um carro | Para que eu possa sanar minhas necessidades |
+| Como agente | Eu desejo modificar e avaliar pedido | De modo que possam ter mais segurança nos alugueis de carro |
+| Como agente | Eu desejo poder estar analisando o ponto de vista financeiro dos pedidos | Para que eu possa estar analisando se a solicitação de aluguel é favorável ou não |
+| Como agente | Eu desejo colocar as considerações para execução do contrato, caso seja aceito o aluguel | De modo que eu possa estar registrando a validação do aluguel do automóvel  |
+
 
 
 
