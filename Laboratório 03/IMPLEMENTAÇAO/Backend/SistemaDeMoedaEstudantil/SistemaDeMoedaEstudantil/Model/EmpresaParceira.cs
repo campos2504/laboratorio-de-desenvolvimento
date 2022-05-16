@@ -1,8 +1,10 @@
-﻿namespace SistemaDeMoedaEstudantil.Model
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SistemaDeMoedaEstudantil.Model
 {
-    public class EmpresaParceira
+    [Table("EmpresaPerceira")]
+    public class EmpresaParceira : User
     {
-        public long Id { get; set; }
         public string Nome { get; set; }
         public string Cnpj { get; set; }
     }

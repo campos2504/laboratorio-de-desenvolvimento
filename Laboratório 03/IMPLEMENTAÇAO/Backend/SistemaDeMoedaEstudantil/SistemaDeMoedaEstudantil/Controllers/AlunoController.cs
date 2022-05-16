@@ -80,8 +80,15 @@ namespace SistemaDeMoedaEstudantil.Controllers
         [HttpPost]
         public async Task<ActionResult<Aluno>> PostAluno(Aluno aluno)
         {
-            _context.Aluno.Add(aluno);
+            var conta = new Conta();
+            conta.Saldo = 0;
+            _context.Conta.Add(conta);
             await _context.SaveChangesAsync();
+
+            aluno.UserType = UserType.ALUNO;
+            aluno.ContaId = conta.Id;
+            _context.Aluno.Add(aluno);
+            await _context.SaveChangesAsync();            
 
             return CreatedAtAction("GetAluno", new { id = aluno.Id }, aluno);
         }

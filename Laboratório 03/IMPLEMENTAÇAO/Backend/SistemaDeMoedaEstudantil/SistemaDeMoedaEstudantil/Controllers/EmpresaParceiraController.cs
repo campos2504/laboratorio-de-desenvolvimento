@@ -80,6 +80,7 @@ namespace SistemaDeMoedaEstudantil.Controllers
         [HttpPost]
         public async Task<ActionResult<EmpresaParceira>> PostEmpresaParceira(EmpresaParceira empresaParceira)
         {
+            empresaParceira.UserType = UserType.EMPRESAPARCEIRA;
             _context.EmpresaPerceira.Add(empresaParceira);
             await _context.SaveChangesAsync();
 
