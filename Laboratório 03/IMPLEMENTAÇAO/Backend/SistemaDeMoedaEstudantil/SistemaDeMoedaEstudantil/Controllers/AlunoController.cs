@@ -25,7 +25,10 @@ namespace SistemaDeMoedaEstudantil.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Aluno>>> GetAluno()
         {
-            return await _context.Aluno.ToListAsync();
+            var alunos = await _context.Aluno.Include(p => p.Conta).Include(p => p.InstituicaoEnsino).ToListAsync();
+
+            return alunos;
+
         }
 
         // GET: api/Alunos/5
@@ -40,6 +43,14 @@ namespace SistemaDeMoedaEstudantil.Controllers
             }
 
             return aluno;
+        }
+
+
+        // GET: api/Alunos/ie/5
+        [HttpGet("ie/{ie}")]
+        public List<Aluno> GetAlunoIe(long ie)
+        {
+            return _context.Aluno.Where(p => p.InstituicaoEnsinoId.Equals(ie)).ToList();            
         }
 
         // PUT: api/Alunos/5

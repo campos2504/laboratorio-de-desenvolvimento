@@ -43,6 +43,9 @@ namespace SistemaDeMoedaEstudantil.Migrations
                     b.Property<long>("ContaId")
                         .HasColumnType("bigint");
 
+                    b.Property<int>("TransacaoType")
+                        .HasColumnType("int");
+
                     b.Property<double>("Valor")
                         .HasColumnType("float");
 

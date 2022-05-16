@@ -25,10 +25,16 @@ namespace SistemaDeMoedaEstudantil.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
-            return await _context.User.ToListAsync();
+            var getUser = await _context.User.ToListAsync();
+            foreach (var user in getUser)
+            {
+                user.UserType.ToString();
+            }
+
+            return getUser;
         }
 
-        // GET: api/User/5
+        /*// GET: api/User/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(long id)
         {
@@ -37,6 +43,20 @@ namespace SistemaDeMoedaEstudantil.Controllers
             if (user == null)
             {
                 return NotFound();
+            }
+
+            return user;
+        }*/
+
+        // GET: api/User/@
+        [HttpGet("{email}")]
+        public User GetUserEmail(string email)
+        {
+            var user = _context.User.SingleOrDefault(p => p.Email.Equals(email));
+
+            if (user == null)
+            {
+                return null;
             }
 
             return user;
