@@ -1,23 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nataniel\\laboratorio-de-desenvolvimento\\Laboratório 04\\IMPLEMENTAÇAO\\Backend\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil.csproj": {}
+    "C:\\Users\\izabe\\Lab 4\\laboratorio-de-desenvolvimento\\Laboratório 04\\IMPLEMENTAÇAO\\Backend\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nataniel\\laboratorio-de-desenvolvimento\\Laboratório 04\\IMPLEMENTAÇAO\\Backend\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil.csproj": {
+    "C:\\Users\\izabe\\Lab 4\\laboratorio-de-desenvolvimento\\Laboratório 04\\IMPLEMENTAÇAO\\Backend\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nataniel\\laboratorio-de-desenvolvimento\\Laboratório 04\\IMPLEMENTAÇAO\\Backend\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil.csproj",
+        "projectUniqueName": "C:\\Users\\izabe\\Lab 4\\laboratorio-de-desenvolvimento\\Laboratório 04\\IMPLEMENTAÇAO\\Backend\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil.csproj",
         "projectName": "SistemaDeMoedaEstudantil",
-        "projectPath": "C:\\Users\\Nataniel\\laboratorio-de-desenvolvimento\\Laboratório 04\\IMPLEMENTAÇAO\\Backend\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil.csproj",
-        "packagesPath": "C:\\Users\\Nataniel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nataniel\\laboratorio-de-desenvolvimento\\Laboratório 04\\IMPLEMENTAÇAO\\Backend\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil\\obj\\",
+        "projectPath": "C:\\Users\\izabe\\Lab 4\\laboratorio-de-desenvolvimento\\Laboratório 04\\IMPLEMENTAÇAO\\Backend\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil.csproj",
+        "packagesPath": "C:\\Users\\izabe\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\izabe\\Lab 4\\laboratorio-de-desenvolvimento\\Laboratório 04\\IMPLEMENTAÇAO\\Backend\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Nataniel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\izabe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -98,7 +100,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
         }
       }
     }
