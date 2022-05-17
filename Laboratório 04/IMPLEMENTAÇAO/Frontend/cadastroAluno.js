@@ -34,13 +34,14 @@ function imprimeInstitucao() {
  * Início - Inclusão de novo aluno na base de dados.
  */
  const saveProviderAluno = (data) => {
+  let instituicaoEnsino = parseInt(data.instituicaoEnsino);
   const renamedData = {
     nome: data.nome,
     email: data.email,
     cpf: data.cpf,
     rg:data.rg,
     endereco: data.endereco,
-    instituicaoEnsinoId: data.instituicaoEnsino,
+    instituicaoEnsinoId: instituicaoEnsino,
     curso: data.curso,
     senha: data.senha,
   }
@@ -87,7 +88,7 @@ function imprimeDados() {
        <td>${data[i].cpf}</td>
        <td>${data[i].rg}</td>
        <td>${data[i].endereco}</td>
-       <td>${data[i].instituicaoEnsinoId}</td>
+       <td>${data[i].instituicaoEnsino.nome}</td>
        <td>${data[i].curso}</td>
        <td>
        <button type="button" id="btn_editar" onclick="editar(${data[i].id})" data-toggle="modal"
@@ -116,7 +117,7 @@ const formAluno = {
         cpf: document.getElementById('CPF').value,
         rg: document.getElementById('RG').value,
         endereco: document.getElementById('endereco').value,
-        instituicaoEnsinoId: document.getElementById('instituicaoEnsino').value,
+        instituicaoEnsino: document.getElementById('instituicaoEnsino').value,
         curso: document.getElementById('curso').value,
         senha: document.getElementById('senha').value
 

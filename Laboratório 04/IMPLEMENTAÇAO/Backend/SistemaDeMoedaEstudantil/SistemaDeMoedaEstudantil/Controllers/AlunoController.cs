@@ -89,19 +89,19 @@ namespace SistemaDeMoedaEstudantil.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Aluno>> PostAluno(Aluno aluno)
+        public IActionResult PostAluno(Aluno aluno)
         {
             var conta = new Conta();
             conta.Saldo = 0;
             _context.Conta.Add(conta);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             aluno.UserType = UserType.ALUNO;
             aluno.ContaId = conta.Id;
             _context.Aluno.Add(aluno);
-            await _context.SaveChangesAsync();            
+            _context.SaveChanges();            
 
-            return CreatedAtAction("GetAluno", new { id = aluno.Id }, aluno);
+            return Ok(aluno);
         }
 
         // DELETE: api/Alunos/5
