@@ -31,7 +31,7 @@ function imprimeAluno() {
    imprimeAluno();
 
 
-const form = {
+const formMoeda = {
     getValue() {
       return {
           aluno: document.getElementById('selectAluno').value,
@@ -41,8 +41,8 @@ const form = {
   
 
     formatProvider() {
-      let { aluno } = form.getValue()
-      let { valorTranferencia } = form.getValue()
+      let { aluno } = formMoeda.getValue()
+      let { valorTranferencia } = formMoeda.getValue()
       
       return {
         aluno, valorTranferencia
@@ -50,15 +50,14 @@ const form = {
     },
   
     clearProvider() {
-      form.aluno.value = ""
-      form.valorTranferencia.value = ""
+      formMoeda.aluno.value = ""
+      formMoeda.valorTranferencia.value = ""
     },
   
     submit(event) {
-      console.log("entrei");
       event.preventDefault()
       try {
-        const SaveProvider = form.formatProvider()
+        const SaveProvider = formMoeda.formatProvider()
         console.log("entrei1");
         console.log(SaveProvider);
         saveProvider(SaveProvider);
@@ -70,40 +69,38 @@ const form = {
 
 
   const saveProvider = (data) => {
-    
-
     for(i = 0; i < alunosCadastrados.length; i++){
 
-      if(data.nome == alunosCadastrados[i].nome){
+      if(data.aluno == alunosCadastrados[i].id){
         alunoSelecionado = alunosCadastrados[i];
       }
     };
+    let contaProfessorId = 10016;
+    let contaAlunoId = alunoSelecionado.contaId;
 
-    let contaProfessorId = 1;
-    let contaAlunoId = alunoSelecionado.contaId ;
+    let valorMoeda = parseInt(data.valorTranferencia);
 
     const renamedData = {
-      valor: data.valorTranferencia,
+      valor: valorMoeda,
       contaAlunoId: contaAlunoId,
       contaProfessorId: contaProfessorId,
     };
 
-    console.log(renamedData);
-    const xhr = new XMLHttpRequest();
+    const xhrMoeda = new XMLHttpRequest();
   
-    xhr.open('POST', 'https://localhost:44372/api/extrato', true);
-    xhr.setRequestHeader("Content-type", "application/json");
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState == 4) {
-        if (xhr.status == 200) {
-          console.log(xhr.responseText);
+    xhrMoeda.open('POST', 'https://localhost:44372/api/extrato', true);
+    xhrMoeda.setRequestHeader("Content-type", "application/json");
+    xhrMoeda.onreadystatechange = () => {
+      if (xhrMoeda.readyState == 4) {
+        if (xhrMoeda.status == 200) {
+          console.log(xhrMoeda.responseText);
           window.location.reload();
         }
       }
     }
   
     console.log("dados->", renamedData);
-    xhr.send(JSON.stringify(renamedData));
+    xhrMoeda.send(JSON.stringify(renamedData));
   }
 
 
