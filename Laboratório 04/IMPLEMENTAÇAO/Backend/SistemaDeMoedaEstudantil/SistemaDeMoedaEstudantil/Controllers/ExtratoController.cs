@@ -43,6 +43,14 @@ namespace SistemaDeMoedaEstudantil.Controllers
             return extrato;
         }
 
+        // GET: api/Extrato/5
+        [HttpGet("extratoConta/{id}")]
+        public List<Extrato> GetExtratoConta(long id)
+        {
+            return _context.Extrato.Where(p => p.ContaId.Equals(id)).Include(p => p.Conta).ToList();
+
+        }
+
         // PUT: api/Extrato/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
@@ -82,10 +90,24 @@ namespace SistemaDeMoedaEstudantil.Controllers
         public async Task<ActionResult<ExtratoViewModel>> PostExtrato(ExtratoViewModel extrato)
         {
             //Atualiza saldo professor
-            var contaProf = await _context.Conta.FindAsync(extrato.ContaProfessorId);
+            var contas = await _context.Conta.ToListAsync();
             Conta contaProfessor = new Conta();
-            contaProfessor = contaProf;
+            Conta contaAluno = new Conta();
 
+
+            foreach (var cont in contas)
+            {
+                if(cont.Id == extrato.ContaProfessorId)
+                {
+                    contaProfessor = cont;
+                }
+                if(cont.Id == extrato.ContaAlunoId)
+                {
+                    contaAluno = cont;
+                }
+            }            
+
+            //Atualiza saldo professor
             double saldoAtualProfessor = contaProfessor.Saldo;
 
             if(saldoAtualProfessor < extrato.Valor)
@@ -96,24 +118,17 @@ namespace SistemaDeMoedaEstudantil.Controllers
                     errors = "Saldo insuficiente",
                 });
             }
-            saldoAtualProfessor = saldoAtualProfessor - extrato.Valor;
 
+            saldoAtualProfessor = saldoAtualProfessor - extrato.Valor;
             contaProfessor.Saldo = saldoAtualProfessor;
             contaProfessor.Id = extrato.ContaProfessorId;
-
             atualizaConta(contaProfessor);
 
             //Atualiza saldo aluno
-            var contaAlun = await _context.Conta.FindAsync(extrato.ContaAlunoId);
-            Conta contaAluno = new Conta();
-            contaAluno = contaAlun;
-
             double saldoAtualAluno = contaAluno.Saldo;
             saldoAtualAluno = saldoAtualAluno + extrato.Valor;
-
             contaAluno.Saldo = saldoAtualAluno;
             contaAluno.Id = extrato.ContaAlunoId;
-
             atualizaConta(contaAluno);
 
 
@@ -122,22 +137,17 @@ namespace SistemaDeMoedaEstudantil.Controllers
             extratoProfessor.ContaId = extrato.ContaProfessorId;
             extratoProfessor.Valor = extrato.Valor;
             extratoProfessor.TransacaoType = TransacaoType.ENVIADO;
-            _context.Extrato.Add(extratoProfessor);
-            await _context.SaveChangesAsync();
-
+            criaExtrato(extratoProfessor);
 
             //Novo extrato aluno
             var extratoAluno = new Extrato();
             extratoAluno.ContaId = extrato.ContaAlunoId;
             extratoAluno.Valor = extrato.Valor;
             extratoAluno.TransacaoType = TransacaoType.RECEBIDO;
-            _context.Extrato.Add(extratoAluno);
-            await _context.SaveChangesAsync();
-
-
+            criaExtrato(extratoAluno);           
             
 
-            return CreatedAtAction("GetExtrato", new { id = extrato.Id }, extrato);
+            return Ok("Sucess");
         }
 
 
@@ -146,6 +156,12 @@ namespace SistemaDeMoedaEstudantil.Controllers
             _context.Entry(contaAtualizacao).State = EntityState.Modified;
             _context.SaveChangesAsync();
 
+        }
+
+        public void criaExtrato(Extrato extrato)
+        {
+            _context.Extrato.Add(extrato);
+            _context.SaveChangesAsync();
         }
 
         // DELETE: api/Extrato/5

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+AZQA1fKn7msl2zm4fL22viAzDb/VhC5muRXrQnZBEeUpf3Eec9xs1jp0XBqxCa1ZdLWqTkyRm4BxkuSfJLPnQ==",
+  "dgSpecHash": "XefMlEBNqIzaM7kirYMd+YY9smSgWd5uvXal7LijkotBezkxN4eDKnR3g9fzgU0/Oa7G1Xo7/KvTjLC+z6EfGg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Nataniel\\laboratorio-de-desenvolvimento\\Laboratório 03\\IMPLEMENTAÇAO\\Backend\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil.csproj",
+  "projectFilePath": "C:\\Users\\Nataniel\\laboratorio-de-desenvolvimento\\Laboratório 04\\IMPLEMENTAÇAO\\Backend\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nataniel\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.2\\microsoft.aspnet.webapi.client.5.2.2.nupkg.sha512",
     "C:\\Users\\Nataniel\\.nuget\\packages\\microsoft.aspnet.webapi.core\\5.2.2\\microsoft.aspnet.webapi.core.5.2.2.nupkg.sha512",

@@ -11145,11 +11145,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Nataniel\\laboratorio-de-desenvolvimento\\Laboratório 03\\IMPLEMENTAÇAO\\Backend\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil.csproj",
+      "projectUniqueName": "C:\\Users\\Nataniel\\laboratorio-de-desenvolvimento\\Laboratório 04\\IMPLEMENTAÇAO\\Backend\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil.csproj",
       "projectName": "SistemaDeMoedaEstudantil",
-      "projectPath": "C:\\Users\\Nataniel\\laboratorio-de-desenvolvimento\\Laboratório 03\\IMPLEMENTAÇAO\\Backend\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil.csproj",
+      "projectPath": "C:\\Users\\Nataniel\\laboratorio-de-desenvolvimento\\Laboratório 04\\IMPLEMENTAÇAO\\Backend\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil.csproj",
       "packagesPath": "C:\\Users\\Nataniel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Nataniel\\laboratorio-de-desenvolvimento\\Laboratório 03\\IMPLEMENTAÇAO\\Backend\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil\\obj\\",
+      "outputPath": "C:\\Users\\Nataniel\\laboratorio-de-desenvolvimento\\Laboratório 04\\IMPLEMENTAÇAO\\Backend\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
