@@ -107,32 +107,35 @@ const formMoeda = {
   //----------------------------------------------------------- Extrato
 
 
-  function imprimeExtrato() {
+  function imprimeExtratoProfessor() {
+
+
+
+    let extratoAluno = `https://localhost:44372/api/extrato/extratoConta/10016`;
   
-    let extratoProfessor = `https://localhost:44372/api/extrato/extratoConta/6`;
-    fetch(extratoProfessor, {
-  
+    fetch(extratoAluno, {
     }).then(result => result.json())
-      .then((data) => {
-
-        console.log(data);
-        let tela = document.getElementById('content');
-        let strHtml = "";
-
-    // Montar texto HTML dos módulos
-    for (i = 0; i < data.length; i++) {
-
-      strHtml += `
-      <tr>
-       <td>${data[0].valor}</td>
-        <td>${extrato[0].TransacaoType}</td>
-  `;
-    };
-
-    // Preencher a DIV com o texto HTML
-    tela.innerHTML = strHtml;
-  })
   
-}
+      .then((data) => {
+        console.log(data);
+        document.getElementById('saldo').value = data[0].conta.saldo;
+        let tela = document.getElementById('content');
+  
+        let strHtml = "";
+        // Montar texto HTML dos módulos
+  
+        for (i = 0; i < data.length; i++) {
+          strHtml += `
+  
+        <tr>
+        <td>${data[i].valor}</td>
+        <td>${data[0].transacaoType ? "Enviado" : "Recebido"}</td>
+  `;
 
-   imprimeExtrato();
+        };
+        // Preencher a DIV com o texto HTML  
+        tela.innerHTML = strHtml;
+  
+      })
+  }
+  imprimeExtratoProfessor();

@@ -38,7 +38,6 @@
             <table id="tableExtrato" class="records">
                 <thead>
                     <tr>
-                        <th>Aluno</th>
                         <th>Valor</th>
                         <th>Status</th>
                     </tr>
@@ -57,14 +56,23 @@
 
 
   <div id="tableClient" class="records">
+
+    <label for="saldo"> Saldo:</label>
+    <input type="value" id="saldo" class="modal-field" placeholder="Tranferência..." required style="margin-bottom: 50px;"> 
+
     <form  id="form" class="modal-form">
         <select id="selectAluno" class="form-control col-md-5">
             <option selected>Aluno...</option>
         </select>
         <label for="valorTransf">Valor: R$</label>
-        <input type="number"  id="valorTransf" class="modal-field" placeholder="Tranferência..." required>  
+        <input type="number" id="valorTransf" class="modal-field" placeholder="Tranferência..." required>  
         </br>
-          <button type="button" class="btn btn-primary envio " onclick="form.submit(event)">Enviar</button>
+
+        <div>
+          <button type="button" class="btn btn-primary envio " onclick="formMoeda.submit(event)">Enviar</button>
+          
+        </div>
+            
     </form>
   </div>
     </main>
