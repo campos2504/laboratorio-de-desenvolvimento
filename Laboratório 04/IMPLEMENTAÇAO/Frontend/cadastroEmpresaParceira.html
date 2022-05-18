@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,200;1,800&display=swap"
+        rel="stylesheet">
+    <title>CRUD Empresa Parceira</title>
+    <link rel="stylesheet" href="modal.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="tabela.css">
+    <link rel="stylesheet" href="botoes.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+
+    <header>
+        <h1 class="header-title">Moeda Estudantil</h1>
+    </header>
+    <main style="width: 80%;">
+<!-- Botão para acionar modal -->
+<button type="button"  class="btn btn-primary blue" data-toggle="modal" data-target="#modalNovaEmpresa">
+    Cadastrar Empresa </button>
+  
+  <!-- Modal novo aluno -->
+  <div class="modal fade" id="modalNovaEmpresa" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="TituloModalCentralizado">Nova empresa parceira</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form  id="form" class="modal-form">
+                <input type="text" id="nome" data-index="new" class="modal-field" placeholder="Nome do aluno"
+                    required>
+                <input type="email"  id="email" class="modal-field" placeholder="e-mail do aluno" required>
+                <input type="password"  id="senha" class="modal-field" placeholder="Senha" required>
+
+                <button type="button" class="btn btn-secondary red" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary green" onclick="formEmpresaParceira.submit(event)">Salvar</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Modal edita aluno -->
+    <div class="modal" id="modalEditaEmpresa" tabindex="-1" role="dialog" >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="TituloModalCentralizado">Editar Cadastro Empresa Parceira</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form  id="formEdit" class="modal-form">
+                    <input type="text"  id="EditNome" data-index="new" class="modal-field" placeholder="Nome"
+                        required>
+                    <input type="email"  id="EditEmail" class="modal-field" placeholder="e-mail" required>
+                    <input type="password"  id="EditSenha" class="modal-field" placeholder="Senha" required>
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary red" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-primary green" onclick="formEmpresaParceiraUpdate.submit(event)">Salvar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  <h2 class="header-title">Empresas Cadastradas</h2>
+  <table id="tableClient" class="records">
+      <thead>
+          <tr>
+              <th>Nome</th>
+              <th>E-mail</th>
+              <th>Senha</th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody id ="content">
+
+      </tbody>
+  </table>
+
+
+    </main>
+
+
+
+<script src="cadastroEmpresaParceira.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>

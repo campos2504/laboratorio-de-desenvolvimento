@@ -3,27 +3,24 @@
 
 
  function imprimeExtrato() {
-  fetch(baseURL, {
+  
+      let extratoAluno = `https://localhost:44372/api/extrato/extratoConta/6`;
+      fetch(extratoAluno, {
     
-  }).then(result => result.json())
-    .then((data) => {
- 
-      let tela = document.getElementById('content');
-      let strHtml = "";
-      console.log(data);
+      }).then(result => result.json())
+        .then((data) => {
 
-
-      let extratoProfessor = `https://localhost:44372/api/extrato/extratoConta/`;
-      
+          console.log(data);
+          let tela = document.getElementById('content');
+          let strHtml = "";
 
       // Montar texto HTML dos módulos
       for (i = 0; i < data.length; i++) {
  
         strHtml += `
         <tr>
-        <td>${data[i].nome}</td>
-        <td>${data[i].valor}</td>
-        <td>${data[i].TransacaoType}</td>
+         <td>${extrato[0].valor}</td>
+          <td>${extrato[0].TransacaoType}</td>
     `;
       };
  
