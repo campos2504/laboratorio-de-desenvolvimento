@@ -92,7 +92,7 @@ function imprimeDados() {
        <td>${data[i].curso}</td>
        <td>
        <button type="button" id="btn_editar" onclick="editar(${data[i].id})" data-toggle="modal"
-       data-target="modal" class="btn button green">Editar</button>
+       data-target="#modalEditaAluno" class="btn button green">Editar</button>
      <button type="button" id="btn_excluir" onclick="deletaAluno(${data[i].id})"
        class="btn button red">Excluir</button>
        </td>
@@ -191,11 +191,7 @@ function deletaAluno(id) {
 imprimeDados();
 
 
-/**
- * Função para editar o cadastro do Aluno. O modal é preenchidos com os dados já cadastrados.
- 
-
- function editar(id) {
+function editar(id) {
   console.log("Entrou..... ->");
   console.log("Id selecionado ->", id);
   fetch(baseURL, {
@@ -206,14 +202,14 @@ imprimeDados();
       for (i = 0; i < data.length; i++) {
         if (data[i].id == id) {
           console.log(data[i]);
-          $("nome").val(data[i].nome);
-          $("email").val(data[i].email);
-          $("CPF").val(data[i].cpf);
-          $("RG").val(data[i].rg);
-          $("endereco").val(data[i].endereco);
-          $("instituicaoEnsino").val(data[i].instituicaoEnsinoId);
-          $("curso").val(data[i].curso);
-          $("senha").val(data[i].senha);
+          $("#EditNome").val(data[i].nome);
+          $("#EditEmail").val(data[i].email);
+          $("#EditCPF").val(data[i].cpf);
+          $("#EditRG").val(data[i].rg);
+          $("#EditEndereco").val(data[i].endereco);
+          $("#instituicaoEnsinoEdit").val(data[i].instituicaoEnsinoId);
+          $("#EditCurso").val(data[i].curso);
+          $("#EditSenha").val(data[i].senha);
          
         }
       }
@@ -222,8 +218,11 @@ imprimeDados();
   //openModal()
 }
 
-/*
- Chama formulário edita aluno 
+
+/**
+ * Função para editar o cadastro do Aluno. O modal é preenchidos com os dados já cadastrados.
+ */
+
 
 const formAlunoUpdate = {
   getValue() {
@@ -270,7 +269,6 @@ const formAlunoUpdate = {
     console.log("entrooou")
     event.preventDefault()
     try {
-      formAlunoUpdate.validateFields()
       const SaveProviderUpdate = formAlunoUpdate.formatProvider()
       saveProviderUpdate(SaveProviderUpdate)
     } catch (error) {
@@ -280,9 +278,10 @@ const formAlunoUpdate = {
 }
 
 
- * Início - Atualização dos dados do aluno já cadastrado.
+ /* Início - Atualização dos dados do aluno já cadastrado.*/
 
  const saveProviderUpdate = (data) => {
+  let instituicaoEnsino = parseInt(data.instituicaoEnsino);
   const renamedDataUpdate = {
     id: idUpdate,
     nome: data.nome,
@@ -290,7 +289,7 @@ const formAlunoUpdate = {
     cpf: data.cpf,
     rg:data.rg,
     endereco: data.endereco,
-    instituicaoEnsino: data.instituicaoEnsinoId,
+    instituicaoEnsinoId: instituicaoEnsino,
     curso: data.curso,
     senha: data.senha,
   }
@@ -310,9 +309,10 @@ const formAlunoUpdate = {
   }
   console.log("dados->>", renamedDataUpdate);
   xhrUpdate.send(JSON.stringify(renamedDataUpdate));
+  imprimeDados();
 }
 
-*/
+
 
 imprimeInstitucao();
 
