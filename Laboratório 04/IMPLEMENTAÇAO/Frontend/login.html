@@ -46,7 +46,7 @@
 
             const xhr = new XMLHttpRequest();
 
-            xhr.open('GET', 'https://localhost:44327/api/User/' + renamedData.email, true);
+            xhr.open('GET', 'https://localhost:44372/api/User/' + renamedData.email, true);
             xhr.setRequestHeader("Content-type", "application/json");
 
             xhr.onreadystatechange = () => {
@@ -54,9 +54,9 @@
                     if (xhr.status == 200) {
                         let usuario = JSON.parse(xhr.responseText);
 
-
+                           console.log(usuario); 
                         if (usuario) {
-                            if (usuasio.data.senha == renamedData.senha) {
+                            if (usuario.senha == renamedData.senha) {
                                 localStorage.setItem('user', JSON.stringify(usuario.data));
                                 window.location.href = 'EnvioMoeda.html';
                             }else{
