@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SistemaDeMoedaEstudantil.Business;
 using SistemaDeMoedaEstudantil.Model;
 using SistemaDeMoedaEstudantil.Repositorys;
 
@@ -14,35 +15,32 @@ namespace SistemaDeMoedaEstudantil.Controllers
     [ApiController]
     public class AlunoController : ControllerBase
     {
-        private readonly SistemaMoedaEstudantilContext _context;
+        private IAlunoBusiness _alunoBusiness;
 
-        public AlunoController(SistemaMoedaEstudantilContext context)
+        public AlunoController(IAlunoBusiness alunoBusiness)
         {
-            _context = context;
+            _alunoBusiness = alunoBusiness;
         }
 
-        // GET: api/Alunos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Aluno>>> GetAluno()
+        public IActionResult Get()
         {
-            var alunos = await _context.Aluno.Include(p => p.Conta).Include(p => p.InstituicaoEnsino).ToListAsync();
-
-            return alunos;
-
+            List<Aluno> aluno = _alunoBusiness.FindAll();
+            
+            return Ok(aluno);
         }
 
-        // GET: api/Alunos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Aluno>> GetAluno(long id)
+        public IActionResult Get(long id)
         {
-            var aluno = await _context.Aluno.FindAsync(id);
+            var aluno = _alunoBusiness.FindByID(id);
 
             if (aluno == null)
             {
                 return NotFound();
             }
 
-            return aluno;
+            return Ok(aluno);
         }
 
 
@@ -50,79 +48,55 @@ namespace SistemaDeMoedaEstudantil.Controllers
         [HttpGet("ie/{ie}")]
         public List<Aluno> GetAlunoIe(long ie)
         {
-            return _context.Aluno.Where(p => p.InstituicaoEnsinoId.Equals(ie)).ToList();            
+            return _alunoBusiness.GetAlunoIe(ie);
         }
 
-        // PUT: api/Alunos/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutAluno(long id, Aluno aluno)
+        [HttpPost]
+        public IActionResult Post([FromBody] Aluno aluno)
         {
-            if (id != aluno.Id)
+            if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(new
+                {
+                    success = false,
+                    errors = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage))
+                });
             }
 
-            _context.Entry(aluno).State = EntityState.Modified;
+            if (aluno == null) return BadRequest();
 
-            try
+            return Ok(_alunoBusiness.Create(aluno));
+        }
+
+        [HttpPut]
+        public IActionResult Put([FromBody] Aluno aluno)
+        {
+            if (!ModelState.IsValid)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AlunoExists(id))
+                return BadRequest(new
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                    success = false,
+                    errors = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage))
+                });
             }
+
+            if (aluno == null) return BadRequest();
+
+            return Ok(_alunoBusiness.Update(aluno));
+
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(long id)
+        {
+            _alunoBusiness.Delete(id);
 
             return NoContent();
         }
 
-        // POST: api/Alunos
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public IActionResult PostAluno(Aluno aluno)
-        {
-            var conta = new Conta();
-            conta.Saldo = 0;
-            _context.Conta.Add(conta);
-            _context.SaveChanges();
-
-            aluno.UserType = UserType.ALUNO;
-            aluno.ContaId = conta.Id;
-            _context.Aluno.Add(aluno);
-            _context.SaveChanges();            
-
-            return Ok(aluno);
-        }
-
-        // DELETE: api/Alunos/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Aluno>> DeleteAluno(long id)
-        {
-            var aluno = await _context.Aluno.FindAsync(id);
-            if (aluno == null)
-            {
-                return NotFound();
-            }
-
-            _context.Aluno.Remove(aluno);
-            await _context.SaveChangesAsync();
-
-            return aluno;
-        }
-
-        private bool AlunoExists(long id)
-        {
-            return _context.Aluno.Any(e => e.Id == id);
-        }
     }
 }

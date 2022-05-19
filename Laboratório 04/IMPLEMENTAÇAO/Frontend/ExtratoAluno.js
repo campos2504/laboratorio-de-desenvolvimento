@@ -1,6 +1,6 @@
 function imprimeExtratoAluno() {
 
-  let extratoAluno = `https://localhost:44372/api/extrato/extratoConta/10016`;
+  let extratoAluno = `https://localhost:44372/api/extrato/extratoConta/1`;
 
   fetch(extratoAluno, {
   }).then(result => result.json())

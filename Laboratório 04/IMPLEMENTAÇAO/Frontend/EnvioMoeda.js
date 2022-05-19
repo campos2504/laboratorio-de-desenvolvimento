@@ -75,7 +75,7 @@ const formMoeda = {
         alunoSelecionado = alunosCadastrados[i];
       }
     };
-    let contaProfessorId = 10016;
+    let contaProfessorId = 2;
     let contaAlunoId = alunoSelecionado.contaId;
 
     let valorMoeda = parseInt(data.valorTranferencia);
@@ -111,7 +111,7 @@ const formMoeda = {
 
 
 
-    let extratoAluno = `https://localhost:44372/api/extrato/extratoConta/10016`;
+    let extratoAluno = `https://localhost:44372/api/extrato/extratoConta/2`;
   
     fetch(extratoAluno, {
     }).then(result => result.json())

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SistemaDeMoedaEstudantil.Business;
 using SistemaDeMoedaEstudantil.Model;
 using SistemaDeMoedaEstudantil.Repositorys;
 using SistemaDeMoedaEstudantil.ViewModel;
@@ -15,174 +16,88 @@ namespace SistemaDeMoedaEstudantil.Controllers
     [ApiController]
     public class ExtratoController : ControllerBase
     {
-        private readonly SistemaMoedaEstudantilContext _context;
+        private IExtratoBusiness _extratoBusiness;
 
-        public ExtratoController(SistemaMoedaEstudantilContext context)
+        public ExtratoController(IExtratoBusiness extratoBusiness)
         {
-            _context = context;
+            _extratoBusiness = extratoBusiness;
         }
 
-        // GET: api/Extrato
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Extrato>>> GetExtrato()
+        public IActionResult Get()
         {
-            return await _context.Extrato.ToListAsync();
+            List<Extrato> extrato = _extratoBusiness.FindAll();
+
+            return Ok(extrato);
         }
 
-        // GET: api/Extrato/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Extrato>> GetExtrato(long id)
+        public IActionResult Get(long id)
         {
-            var extrato = await _context.Extrato.FindAsync(id);
+            var extrato = _extratoBusiness.FindByID(id);
 
             if (extrato == null)
             {
                 return NotFound();
             }
 
-            return extrato;
+            return Ok(extrato);
         }
 
         // GET: api/Extrato/5
         [HttpGet("extratoConta/{id}")]
         public List<Extrato> GetExtratoConta(long id)
         {
-            return _context.Extrato.Where(p => p.ContaId.Equals(id)).Include(p => p.Conta).ToList();
+            return _extratoBusiness.GetExtratoConta(id);
 
         }
 
-        // PUT: api/Extrato/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutExtrato(long id, Extrato extrato)
-        {
-            if (id != extrato.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(extrato).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ExtratoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Extrato
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<ExtratoViewModel>> PostExtrato(ExtratoViewModel extrato)
+        public IActionResult Post([FromBody] ExtratoViewModel extratoViewModel)
         {
-            //Atualiza saldo professor
-            var contas = await _context.Conta.ToListAsync();
-            Conta contaProfessor = new Conta();
-            Conta contaAluno = new Conta();
-
-
-            foreach (var cont in contas)
-            {
-                if(cont.Id == extrato.ContaProfessorId)
-                {
-                    contaProfessor = cont;
-                }
-                if(cont.Id == extrato.ContaAlunoId)
-                {
-                    contaAluno = cont;
-                }
-            }            
-
-            //Atualiza saldo professor
-            double saldoAtualProfessor = contaProfessor.Saldo;
-
-            if(saldoAtualProfessor < extrato.Valor)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(new
                 {
                     success = false,
-                    errors = "Saldo insuficiente",
+                    errors = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage))
                 });
             }
 
-            saldoAtualProfessor = saldoAtualProfessor - extrato.Valor;
-            contaProfessor.Saldo = saldoAtualProfessor;
-            contaProfessor.Id = extrato.ContaProfessorId;
-            atualizaConta(contaProfessor);
+            if (extratoViewModel == null) return BadRequest();
 
-            //Atualiza saldo aluno
-            double saldoAtualAluno = contaAluno.Saldo;
-            saldoAtualAluno = saldoAtualAluno + extrato.Valor;
-            contaAluno.Saldo = saldoAtualAluno;
-            contaAluno.Id = extrato.ContaAlunoId;
-            atualizaConta(contaAluno);
-
-
-            //Novo extrato professor
-            var extratoProfessor = new Extrato();
-            extratoProfessor.ContaId = extrato.ContaProfessorId;
-            extratoProfessor.Valor = extrato.Valor;
-            extratoProfessor.TransacaoType = TransacaoType.ENVIADO;
-            criaExtrato(extratoProfessor);
-
-            //Novo extrato aluno
-            var extratoAluno = new Extrato();
-            extratoAluno.ContaId = extrato.ContaAlunoId;
-            extratoAluno.Valor = extrato.Valor;
-            extratoAluno.TransacaoType = TransacaoType.RECEBIDO;
-            criaExtrato(extratoAluno);           
-            
-
-            return Ok("Sucess");
+            return Ok(_extratoBusiness.Create(extratoViewModel));
         }
 
-
-        public void atualizaConta(Conta contaAtualizacao)
+        [HttpPut]
+        public IActionResult Put([FromBody] Extrato extrato)
         {
-            _context.Entry(contaAtualizacao).State = EntityState.Modified;
-            _context.SaveChangesAsync();
-
-        }
-
-        public void criaExtrato(Extrato extrato)
-        {
-            _context.Extrato.Add(extrato);
-            _context.SaveChangesAsync();
-        }
-
-        // DELETE: api/Extrato/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Extrato>> DeleteExtrato(long id)
-        {
-            var extrato = await _context.Extrato.FindAsync(id);
-            if (extrato == null)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                return BadRequest(new
+                {
+                    success = false,
+                    errors = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage))
+                });
             }
 
-            _context.Extrato.Remove(extrato);
-            await _context.SaveChangesAsync();
+            if (extrato == null) return BadRequest();
 
-            return extrato;
+            return Ok(_extratoBusiness.Update(extrato));
+
         }
 
-        private bool ExtratoExists(long id)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(long id)
         {
-            return _context.Extrato.Any(e => e.Id == id);
+            _extratoBusiness.Delete(id);
+
+            return NoContent();
+
         }
     }
 }

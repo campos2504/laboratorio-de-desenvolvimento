@@ -7,6 +7,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SistemaDeMoedaEstudantil.Business;
+using SistemaDeMoedaEstudantil.Repository;
+using SistemaDeMoedaEstudantil.Repository.Implementation;
 using SistemaDeMoedaEstudantil.Repositorys;
 using System;
 using System.Collections.Generic;
@@ -39,6 +42,22 @@ namespace SistemaDeMoedaEstudantil
             services.AddDbContext<SistemaMoedaEstudantilContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), builder =>
             builder.MigrationsAssembly("SistemaDeMoedaEstudantil")));
+
+            //Dependency Injection
+            services.AddScoped<IAlunoRepository, AlunoRepositoryImplementation>();
+            services.AddScoped<IAlunoBusiness, AlunoBusinessImplementation>();
+            services.AddScoped<IProfessorRepository, ProfessorRepositoryImplementation>();
+            services.AddScoped<IProfessorBusiness, ProfessorBusinessImplementation>();
+            services.AddScoped<IContaRepository, ContaRepositoryImplementation>();
+            services.AddScoped<IContaBusiness, ContaBusinessImplementation>();
+            services.AddScoped<IExtratoRepository, ExtratoRepositoryImplementation>();
+            services.AddScoped<IExtratoBusiness, ExtratoBusinessImplementation>();
+            services.AddScoped<IEmpresaParceiraRepository, EmpresaParceiraRepositoryImplementation>();
+            services.AddScoped<IEmpresaParceiraBusiness, EmpresaParceiraBusinessImplementation>();
+            services.AddScoped<IInstituicaoEnsinoRepository, InstituicaoEnsinoRepositoryImplementation>();
+            services.AddScoped<IInstituicaoEnsinoBusiness, InstituicaoEnsinoBusinessImplementation>();
+            services.AddScoped<IUserRepository, UserRepositoryImplementation>();
+            services.AddScoped<IUserBusiness, UserBusinessImplementation>();
 
         }
 

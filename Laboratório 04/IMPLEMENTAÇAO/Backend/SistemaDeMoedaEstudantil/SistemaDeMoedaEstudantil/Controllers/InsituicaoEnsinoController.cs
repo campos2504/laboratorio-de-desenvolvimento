@@ -13,38 +13,38 @@ namespace SistemaDeMoedaEstudantil.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProfessorController : ControllerBase
+    public class InstituicaoEnsinoController : ControllerBase
     {
-        private IProfessorBusiness _professorBusiness;
+        private IInstituicaoEnsinoBusiness _instituicaoEnsinoBusiness;
 
-        public ProfessorController(IProfessorBusiness professorBusiness)
+        public InstituicaoEnsinoController(IInstituicaoEnsinoBusiness instituicaoEnsinoBusiness)
         {
-            _professorBusiness = professorBusiness;
+            _instituicaoEnsinoBusiness = instituicaoEnsinoBusiness;
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            List<Professor> professor = _professorBusiness.FindAll();
-            
-            return Ok(professor);
+            List<InstituicaoEnsino> instituicaoEnsino = _instituicaoEnsinoBusiness.FindAll();
+
+            return Ok(instituicaoEnsino);
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(long id)
         {
-            var professor = _professorBusiness.FindByID(id);
+            var instituicaoEnsino = _instituicaoEnsinoBusiness.FindByID(id);
 
-            if (professor == null)
+            if (instituicaoEnsino == null)
             {
                 return NotFound();
             }
 
-            return Ok(professor);
+            return Ok(instituicaoEnsino);
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Professor professor)
+        public IActionResult Post([FromBody] InstituicaoEnsino instituicaoEnsino)
         {
             if (!ModelState.IsValid)
             {
@@ -57,13 +57,13 @@ namespace SistemaDeMoedaEstudantil.Controllers
                 });
             }
 
-            if (professor == null) return BadRequest();
+            if (instituicaoEnsino == null) return BadRequest();
 
-            return Ok(_professorBusiness.Create(professor));
+            return Ok(_instituicaoEnsinoBusiness.Create(instituicaoEnsino));
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Professor professor)
+        public IActionResult Put([FromBody] InstituicaoEnsino instituicaoEnsino)
         {
             if (!ModelState.IsValid)
             {
@@ -76,19 +76,19 @@ namespace SistemaDeMoedaEstudantil.Controllers
                 });
             }
 
-            if (professor == null) return BadRequest();
+            if (instituicaoEnsino == null) return BadRequest();
 
-            return Ok(_professorBusiness.Update(professor));
+            return Ok(_instituicaoEnsinoBusiness.Update(instituicaoEnsino));
 
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            _professorBusiness.Delete(id);
+            _instituicaoEnsinoBusiness.Delete(id);
 
             return NoContent();
-        }
 
+        }
     }
 }

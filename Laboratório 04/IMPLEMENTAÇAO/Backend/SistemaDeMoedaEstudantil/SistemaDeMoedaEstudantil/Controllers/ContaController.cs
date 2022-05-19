@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SistemaDeMoedaEstudantil.Business;
 using SistemaDeMoedaEstudantil.Model;
 using SistemaDeMoedaEstudantil.Repositorys;
 
@@ -14,97 +15,80 @@ namespace SistemaDeMoedaEstudantil.Controllers
     [ApiController]
     public class ContaController : ControllerBase
     {
-        private readonly SistemaMoedaEstudantilContext _context;
+        private IContaBusiness _contaBusiness;
 
-        public ContaController(SistemaMoedaEstudantilContext context)
+        public ContaController(IContaBusiness contaBusiness)
         {
-            _context = context;
+            _contaBusiness = contaBusiness;
         }
 
-        // GET: api/Conta
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Conta>>> GetConta()
+        public IActionResult Get()
         {
-            return await _context.Conta.ToListAsync();
+            List<Conta> conta = _contaBusiness.FindAll();
+
+            return Ok(conta);
         }
 
-        // GET: api/Conta/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Conta>> GetConta(long id)
+        public IActionResult Get(long id)
         {
-            var conta = await _context.Conta.FindAsync(id);
+            var conta = _contaBusiness.FindByID(id);
 
             if (conta == null)
             {
                 return NotFound();
             }
 
-            return conta;
+            return Ok(conta);
         }
 
-        // PUT: api/Conta/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutConta(long id, Conta conta)
+        [HttpPost]
+        public IActionResult Post([FromBody] Conta conta)
         {
-            if (id != conta.Id)
+            if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(new
+                {
+                    success = false,
+                    errors = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage))
+                });
             }
 
-            _context.Entry(conta).State = EntityState.Modified;
+            if (conta == null) return BadRequest();
 
-            try
+            return Ok(_contaBusiness.Create(conta));
+        }
+
+        [HttpPut]
+        public IActionResult Put([FromBody] Conta conta)
+        {
+            if (!ModelState.IsValid)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ContaExists(id))
+                return BadRequest(new
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                    success = false,
+                    errors = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage))
+                });
             }
+
+            if (conta == null) return BadRequest();
+
+            return Ok(_contaBusiness.Update(conta));
+
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(long id)
+        {
+            _contaBusiness.Delete(id);
 
             return NoContent();
-        }
 
-        // POST: api/Conta
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<Conta>> PostConta(Conta conta)
-        {
-            _context.Conta.Add(conta);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetConta", new { id = conta.Id }, conta);
-        }
-
-        // DELETE: api/Conta/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Conta>> DeleteConta(long id)
-        {
-            var conta = await _context.Conta.FindAsync(id);
-            if (conta == null)
-            {
-                return NotFound();
-            }
-
-            _context.Conta.Remove(conta);
-            await _context.SaveChangesAsync();
-
-            return conta;
-        }
-
-        private bool ContaExists(long id)
-        {
-            return _context.Conta.Any(e => e.Id == id);
         }
     }
 }

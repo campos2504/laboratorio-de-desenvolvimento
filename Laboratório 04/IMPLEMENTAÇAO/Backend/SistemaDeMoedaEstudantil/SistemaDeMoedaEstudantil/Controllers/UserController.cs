@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SistemaDeMoedaEstudantil.Business;
 using SistemaDeMoedaEstudantil.Model;
 using SistemaDeMoedaEstudantil.Repositorys;
 
@@ -14,117 +15,80 @@ namespace SistemaDeMoedaEstudantil.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly SistemaMoedaEstudantilContext _context;
+        private IUserBusiness _userBusiness;
 
-        public UserController(SistemaMoedaEstudantilContext context)
+        public UserController(IUserBusiness userBusiness)
         {
-            _context = context;
+            _userBusiness = userBusiness;
         }
 
-        // GET: api/User
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        public IActionResult Get()
         {
-            var getUser = await _context.User.ToListAsync();
-            foreach (var user in getUser)
-            {
-                user.UserType.ToString();
-            }
-
-            return getUser;
+            List<User> user = _userBusiness.FindAll();
+            
+            return Ok(user);
         }
 
-        /*// GET: api/User/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(long id)
+        public IActionResult Get(long id)
         {
-            var user = await _context.User.FindAsync(id);
+            var user = _userBusiness.FindByID(id);
 
             if (user == null)
             {
                 return NotFound();
             }
 
-            return user;
-        }*/
-
-        // GET: api/User/@
-        [HttpGet("{email}")]
-        public User GetUserEmail(string email)
-        {
-            var user = _context.User.SingleOrDefault(p => p.Email.Equals(email));
-
-            if (user == null)
-            {
-                return null;
-            }
-
-            return user;
+            return Ok(user);
         }
 
-        // PUT: api/User/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(long id, User user)
+        [HttpPost]
+        public IActionResult Post([FromBody] User user)
         {
-            if (id != user.Id)
+            if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(new
+                {
+                    success = false,
+                    errors = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage))
+                });
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            if (user == null) return BadRequest();
 
-            try
+            return Ok(_userBusiness.Create(user));
+        }
+
+        [HttpPut]
+        public IActionResult Put([FromBody] User user)
+        {
+            if (!ModelState.IsValid)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
+                return BadRequest(new
                 {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                    success = false,
+                    errors = string.Join("; ", ModelState.Values
+                                        .SelectMany(x => x.Errors)
+                                        .Select(x => x.ErrorMessage))
+                });
             }
+
+            if (user == null) return BadRequest();
+
+            return Ok(_userBusiness.Update(user));
+
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(long id)
+        {
+            _userBusiness.Delete(id);
 
             return NoContent();
         }
 
-        // POST: api/User
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
-        {
-            _context.User.Add(user);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
-        }
-
-        // DELETE: api/User/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(long id)
-        {
-            var user = await _context.User.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            _context.User.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return user;
-        }
-
-        private bool UserExists(long id)
-        {
-            return _context.User.Any(e => e.Id == id);
-        }
     }
 }

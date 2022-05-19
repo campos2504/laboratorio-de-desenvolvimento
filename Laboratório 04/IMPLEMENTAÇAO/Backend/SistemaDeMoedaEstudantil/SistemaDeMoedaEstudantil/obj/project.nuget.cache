@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "XefMlEBNqIzaM7kirYMd+YY9smSgWd5uvXal7LijkotBezkxN4eDKnR3g9fzgU0/Oa7G1Xo7/KvTjLC+z6EfGg==",
+  "dgSpecHash": "RIpOhM/e+4+mOvIhB0HYZXCTA68ZY+4kUM9hxY9+KRMey5p1tAAuOrOmWbEkiqX82iX4amvbj9f7d7bi4vIU8w==",
   "success": true,
   "projectFilePath": "C:\\Users\\Nataniel\\laboratorio-de-desenvolvimento\\Laboratório 04\\IMPLEMENTAÇAO\\Backend\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil\\SistemaDeMoedaEstudantil.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Nataniel\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\Nataniel\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.2\\microsoft.aspnet.webapi.client.5.2.2.nupkg.sha512",
     "C:\\Users\\Nataniel\\.nuget\\packages\\microsoft.aspnet.webapi.core\\5.2.2\\microsoft.aspnet.webapi.core.5.2.2.nupkg.sha512",
     "C:\\Users\\Nataniel\\.nuget\\packages\\microsoft.aspnet.webapi.odata\\5.7.0\\microsoft.aspnet.webapi.odata.5.7.0.nupkg.sha512",
