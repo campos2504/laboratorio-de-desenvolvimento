@@ -1,0 +1,245 @@
+*{
+    font-family: 'Varela Round', sans-serif !important;
+}
+
+body,html {
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: 100vh;
+    height: 100vh;
+    font-family: 'Varela Round', sans-serif !important;
+    font-weight: 800 !important;
+    overflow-x: hidden;
+}
+
+.custom-body {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.imagem_area {    
+    padding: 10px;
+    display: flex;
+    justify-content:center;
+}
+
+.medalha img{   
+    width: 200px;   
+    height: 45px;   
+    margin-top: 6px;
+}
+
+.linha {
+    margin: 0px;
+    border: 0px;
+}
+
+@media screen and (min-width: 768px) {
+    .imagem_area {
+        padding: 10px;
+        display: block;
+        justify-content: center;
+    }
+
+}
+
+@media screen and (max-width: 700px) {
+    #content{
+        display: flex;
+        position: relative;
+        margin:0 auto;
+        padding: 10px;
+        max-width: 100% !important;
+    }
+}
+
+.main-content {
+    height: fit-content;
+    padding-bottom: 20px;
+}
+
+.mensagem{
+    font-family: 'Varela Round', sans-serif;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 42px;
+    letter-spacing: 0.15em;
+    color: #FFFA6F;
+}
+
+.bemVindo{
+    margin-top: 10px;
+    margin-left: 30px !important;
+}
+
+hr {
+    width: 80% !important;
+    height: 80% !important;
+    border: 1px solid #0C6C7A !important;
+    transform: rotate(-0.05deg) !important;
+}
+
+
+
+/*Início - Card módulo*/
+#content{
+    display: flex;
+    position: relative;
+    font-size:40px;
+    margin:0 auto;
+    padding: 10px;
+    max-width: 70%;
+}
+
+.linkModulo {
+    text-decoration: none !important;
+    position: relative;
+    font-family: 'Varela Round', sans-serif;
+    font-style: normal;
+    font-size: 2vw !important;
+    letter-spacing: 0.15em;
+    color: #FFF8E5 !important;
+    text-decoration: none;
+    margin: 0 auto;
+    text-align: center;
+}
+
+a {
+    text-decoration: none !important;
+}
+.nomeModulo {
+    opacity: 0;
+    transition: opacity .2s linear;
+    background-color: rgba(0, 0, 0, .7);
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 auto;
+    padding-top: 5px !important;
+    border-radius: 20px !important;
+}
+
+.card-text{
+    margin: 20% auto 0; 
+}
+
+.position-relative {
+    border-radius: 20px;
+    border: 1px solid #0C6C7A;
+    width: 100%;
+    height: 100%;
+    max-width: 270x;
+    max-height: 300px;
+}
+
+.position-relative img{
+    border-radius: 20px;
+    border: 1px solid #0C6C7A;
+    width: 100%;
+    height: 100%;
+}
+
+.position-relative:hover .nomeModulo {
+    opacity: 1.5;
+    border-radius: 20px;
+}
+
+.btn-circle.btn-sm { 
+    width: 34px !important; 
+    height: 34px !important; 
+    padding: 0px 0px; 
+    border-radius: 17px; 
+    font-size: 10px; 
+    text-align: center;
+}
+
+
+/*Final - Card módulo*/
+
+
+/*Início - Botão adicionar*/
+
+.incluir-tarefaModulo{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin-right: 15px;
+}
+.btn-circle.btn-sm.incluirModulo { 
+    width: 70px !important; 
+    height: 70px !important; 
+    border-radius: 50px; 
+    font-size: 10px; 
+    text-align: center;
+} 
+
+/*Final - Botão adicionar*/
+
+
+/*Início - Upload foto*/
+    
+.imagemModulo{
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+}
+     
+.imagemModulo img{
+    width: 200px;
+    height: 200px;
+    border-radius: 20%;
+    border: 1px solid gray;
+}
+
+#newModulo{
+    position: absolute;
+    border: 2px solid #ABBF54 ;
+    width: 100%;
+    left: 0;
+    top:0;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 20%;
+    z-index: 2;
+    display: none;
+}
+
+#newModuloUpdate{
+    position: absolute;
+    border: 2px solid #ABBF54 ;
+    width: 100%;
+    left: 0;
+    top:0;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 20%;
+    z-index: 2;
+    display: none;
+}
+
+/*Final - Upload foto*/
+
+
+.modulo{
+    margin-bottom: 90px !important;
+}
+
+.editar-excluir{
+    color: #9fb927 !important;
+}
+
+
+.botoesCard{
+    text-align: right;
+}
+
+.card-text{
+    margin-top: 50px;
+}

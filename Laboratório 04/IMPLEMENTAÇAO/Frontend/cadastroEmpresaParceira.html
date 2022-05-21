@@ -36,9 +36,11 @@
         </div>
         <div class="modal-body">
             <form  id="form" class="modal-form">
-                <input type="text" id="nome" data-index="new" class="modal-field" placeholder="Nome do aluno"
+                <input type="text" id="nome" data-index="new" class="modal-field" placeholder="Nome"
                     required>
-                <input type="email"  id="email" class="modal-field" placeholder="e-mail do aluno" required>
+                <input type="text" id="cnpj" data-index="new" class="modal-field" placeholder="CNPJ"
+                    required>
+                <input type="email"  id="email" class="modal-field" placeholder="e-mail" required>
                 <input type="password"  id="senha" class="modal-field" placeholder="Senha" required>
 
                 <button type="button" class="btn btn-secondary red" data-dismiss="modal">Cancelar</button>
@@ -63,6 +65,8 @@
                 <form  id="formEdit" class="modal-form">
                     <input type="text"  id="EditNome" data-index="new" class="modal-field" placeholder="Nome"
                         required>
+                    <input type="text"  id="EditCnpj" data-index="new" class="modal-field" placeholder="CNPJ"
+                        required>
                     <input type="email"  id="EditEmail" class="modal-field" placeholder="e-mail" required>
                     <input type="password"  id="EditSenha" class="modal-field" placeholder="Senha" required>
                     
@@ -81,8 +85,8 @@
       <thead>
           <tr>
               <th>Nome</th>
+              <th>CNPJ</th>
               <th>E-mail</th>
-              <th>Senha</th>
               <th></th>
           </tr>
       </thead>
