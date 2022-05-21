@@ -9,6 +9,7 @@ let idInstituicao;
  const saveProviderEmpresaParceira = (data) => {
   const renamedData = {
     nome: data.nome,
+    cnpj: data.cnpj,
     email: data.email,
     senha: data.senha,
   }
@@ -51,8 +52,8 @@ function imprimeDados() {
        strHtml += `
        <tr>
        <td>${data[i].nome}</td>
+       <td>${data[i].cnpj}</td>
        <td>${data[i].email}</td>
-       <td>${data[i].senha}</td>
        <td>
        <button type="button" id="btn_editar" onclick="editar(${data[i].id})" data-toggle="modal"
        data-target="#modalEditaEmpresa" class="btn button green">Editar</button>
@@ -76,25 +77,25 @@ const formEmpresaParceira = {
   getValue() {
     return {
         nome: document.getElementById('nome').value,
+        cnpj: document.getElementById('cnpj').value,
         email: document.getElementById('email').value,
         senha: document.getElementById('senha').value
-
     }
   },
 
- 
-
   formatProvider() {
     let { nome } = formEmpresaParceira.getValue()
+    let { cnpj } = formEmpresaParceira.getValue()
     let { email } = formEmpresaParceira.getValue()
     let { senha } = formEmpresaParceira.getValue()
     return {
-      nome, email, senha
+      nome, cnpj, email, senha
     }
   },
 
   clearProvider() {
     formEmpresaParceira.nome.value = ""
+    formEmpresaParceira.cnpj.value = ""
     formEmpresaParceira.email.value = ""
     formEmpresaParceira.senha.value = ""
   },
@@ -151,6 +152,7 @@ function editar(id) {
         if (data[i].id == id) {
           console.log(data[i]);
           $("#EditNome").val(data[i].nome);
+          $("#EditCnpj").val(data[i].cnpj);
           $("#EditEmail").val(data[i].email);
           $("#EditSenha").val(data[i].senha);
          
@@ -170,31 +172,32 @@ function editar(id) {
 const formEmpresaParceiraUpdate = {
   getValue() {
     return {
-        nome: document.getElementById('editNome').value,
-        email: document.getElementById('editEmail').value,
-        senha: document.getElementById('editSenha').value,
+        nome: document.getElementById('EditNome').value,
+        cnpj: document.getElementById('EditCnpj').value,
+        email: document.getElementById('EditEmail').value,
+        senha: document.getElementById('EditSenha').value,
     }
   },
 
-
-
   formatProvider() {
     let { nome } = formEmpresaParceiraUpdate.getValue()
+    let { cnpj } = formEmpresaParceiraUpdate.getValue()
     let { email } = formEmpresaParceiraUpdate.getValue()
     let { senha } = formEmpresaParceiraUpdate.getValue()
     return {
-      nome, email, senha
+      nome, cnpj, email, senha
     }
   },
 
   clearProvider() {
     formEmpresaParceiraUpdate.nome.value = ""
+    formEmpresaParceiraUpdate.cnpj.value = ""
     formEmpresaParceiraUpdate.email.value = ""
     formEmpresaParceiraUpdate.senha.value = ""
   },
 
   submit(event) {
-    console.log("entrooou")
+    console.log("entrooouUpdate")
     event.preventDefault()
     try {
       const SaveProviderUpdate = formEmpresaParceiraUpdate.formatProvider()
@@ -213,6 +216,7 @@ const formEmpresaParceiraUpdate = {
   const renamedDataUpdate = {
     id: idUpdate,
     nome: data.nome,
+    cnpj: data.cnpj,
     email: data.email,
     senha: data.senha,
   }

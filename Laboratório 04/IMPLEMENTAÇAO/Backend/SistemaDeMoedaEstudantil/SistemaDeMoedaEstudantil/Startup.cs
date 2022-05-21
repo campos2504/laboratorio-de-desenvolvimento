@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -5,14 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SistemaDeMoedaEstudantil.Business;
+using SistemaDeMoedaEstudantil.Model;
 using SistemaDeMoedaEstudantil.Repository;
 using SistemaDeMoedaEstudantil.Repository.Implementation;
 using SistemaDeMoedaEstudantil.Repositorys;
+using SistemaDeMoedaEstudantil.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -43,6 +48,13 @@ namespace SistemaDeMoedaEstudantil
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), builder =>
             builder.MigrationsAssembly("SistemaDeMoedaEstudantil")));
 
+            //Configuração do Mapper
+            var configMapper = new MapperConfiguration(cfg => {
+                cfg.CreateMap<Vantagem, VantagemViewModel>().ReverseMap();
+            });
+            IMapper mapper = configMapper.CreateMapper();
+
+
             //Dependency Injection
             services.AddScoped<IAlunoRepository, AlunoRepositoryImplementation>();
             services.AddScoped<IAlunoBusiness, AlunoBusinessImplementation>();
@@ -58,6 +70,10 @@ namespace SistemaDeMoedaEstudantil
             services.AddScoped<IInstituicaoEnsinoBusiness, InstituicaoEnsinoBusinessImplementation>();
             services.AddScoped<IUserRepository, UserRepositoryImplementation>();
             services.AddScoped<IUserBusiness, UserBusinessImplementation>();
+            services.AddScoped<IVantagemRepository, VantagemRepositoryImplementation>();
+            services.AddScoped<IVantagemBusiness, VantagemBusinessImplementation>();
+
+            services.AddSingleton(mapper);
 
         }
 
@@ -68,6 +84,11 @@ namespace SistemaDeMoedaEstudantil
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "wwwroot/Images")),
+                RequestPath = "/Images"
+            });
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseCors();
