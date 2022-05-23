@@ -5,7 +5,7 @@
 }
 
 :root{
-    --primary-color: #FFBA00;
+    --primary-color: #e74d3cfd;
     --secundary-color: #FFF1CC;
     --shadow-color: #CCC;
     --text-color: #FFF;
@@ -28,8 +28,10 @@ header{
 }
 
 .header-title{
-    color: black;
+    color: rgb(117, 24, 24);
     font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: .4rem !important;
 }
 
 main{
@@ -50,6 +52,13 @@ footer{
     font-weight: 200;
     font-style: italic;
     padding: 20px;
+    background-color: #e74d3cfd ;
+}
+
+h4{
+    color: rgba(250, 239, 239, 0.911) !important;
+    font-weight: 100;
+    letter-spacing: .2rem !important;
 }
 
 @media (max-width:480px){

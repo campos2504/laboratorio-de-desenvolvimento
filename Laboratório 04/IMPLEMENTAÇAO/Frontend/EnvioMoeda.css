@@ -1,36 +1,4 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
 
-:root{
-    --primary-color: #FFBA00;
-    --secundary-color: #FFF1CC;
-    --shadow-color: #CCC;
-    --text-color: #FFF;
-}
-
-body{
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    font-family: 'karla', sans-serif;
-    position:relative;
-}
-
-header{
-    background-color: var(--primary-color);
-    height: 70px;
-    text-align: center;
-    line-height: 70px;
-    box-shadow: 0 1px 2px var(--shadow-color);
-}
-
-.header-title{
-    color: black;
-    font-size: 2rem;
-}
 .modal-header{
     display: flex;
     position: relative;
@@ -38,6 +6,14 @@ header{
     height: 40px;
     line-height: 40px;
     font-size: 1rem;
+}
+
+.btn{
+    width: 200px;
+    height: 50px;
+    font-size: 20px !important;
+    background-color: brown !important;
+    border: none !important;
 }
 
 .modal-footer{
@@ -70,25 +46,7 @@ label{
     margin-right: 20px;
     font-size: 20px;
 }
-main{
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 90%;
-    margin: 5vh auto;
-    padding: 50px;
-    box-shadow: 2px 2px 10px var(--shadow-color);
-    gap: 20px;
-}
 
-footer{
-    width:100;
-    text-align: center;
-    font-weight: 200;
-    font-style: italic;
-    padding: 20px;
-}
 
 .records{
     width: 90%;
@@ -98,6 +56,30 @@ footer{
     text-align: left;
 }
 
+
+.label-transferencia{
+    font-size: 30px;
+}
+
+.input-saldo{
+    height: 50px;
+    width: 250px;
+}
+
+.saldo-moedas{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 30px !important
+}
+
+.input-valor{
+    height: 50px;
+    width: 350px;
+}
+
+.input-aluno{
+    height: 50px !important;    
+}
 
 @media (max-width:480px){
     header{
@@ -123,14 +105,12 @@ footer{
   
 }
 
-
-
-
 .records th{
     height: 50px;
     background-color: var(--primary-color);
     padding-left: 20px;
-    font-size: 1.2rem;    
+    font-size: 1.2rem; 
+    color: aliceblue;   
 }
 .records td{
     height: 50px;
