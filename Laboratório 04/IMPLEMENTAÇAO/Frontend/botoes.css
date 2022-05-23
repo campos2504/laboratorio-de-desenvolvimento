@@ -9,8 +9,9 @@ button{
     transition: box-shadow .6s ease;
 }
 
-button.blue{
-    background-color: #1FB6FF;
+button.red{
+    background-color: brown !important;
+    margin-bottom: 40px;
 }
 
 button.green{
