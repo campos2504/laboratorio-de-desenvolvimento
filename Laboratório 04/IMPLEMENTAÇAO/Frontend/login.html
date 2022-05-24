@@ -7,7 +7,7 @@
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-        <link rel="stylesheet" href="botoes.css">
+    <link rel="stylesheet" href="botoes.css">
 </head>
 
 <body>
@@ -24,7 +24,7 @@
                     <input type="email" class="form-control" id="email" required>
                 </div>
                 <div class="col-md-12">
-                    <label  style="font-size: 20px;">Senha:</label>
+                    <label style="font-size: 20px;">Senha:</label>
                     <input type="password" class="form-control" id="senha" required>
                 </div>
 
@@ -55,12 +55,25 @@
                     if (xhr.status == 200) {
                         let usuario = JSON.parse(xhr.responseText);
 
-                           console.log(usuario); 
+                        console.log(usuario);
                         if (usuario) {
                             if (usuario.senha == renamedData.senha) {
                                 localStorage.setItem('user', JSON.stringify(usuario));
+                                switch (usuario.usertype) {
+                                    case 0:
+                                        window.location.href = 'EnvioMoeda.html';
+                                        break;
+                                    case 1:
+                                        window.location.href = 'ExtratoAluno.html';
+                                        break;
+                                    case 2:
+                                        window.location.href = 'CadastroVantagens.html';
+                                        break;
+
+
+                                }
                                 window.location.href = 'EnvioMoeda.html';
-                            }else{
+                            } else {
                                 alert("senha errada")
 
                             }
