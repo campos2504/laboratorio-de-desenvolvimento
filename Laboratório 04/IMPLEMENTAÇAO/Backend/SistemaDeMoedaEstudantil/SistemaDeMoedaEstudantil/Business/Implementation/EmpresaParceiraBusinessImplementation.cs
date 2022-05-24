@@ -16,6 +16,8 @@ namespace SistemaDeMoedaEstudantil.Business
 
         public EmpresaParceira Create(EmpresaParceira empresaParceira)
         {
+            empresaParceira.UserType = UserType.EMPRESAPARCEIRA;
+
             return _repository.Create(empresaParceira);
         }
 

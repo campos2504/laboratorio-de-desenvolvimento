@@ -1,4 +1,5 @@
-﻿using SistemaDeMoedaEstudantil.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using SistemaDeMoedaEstudantil.Model;
 using SistemaDeMoedaEstudantil.Repositorys;
 using System;
 using System.Collections.Generic;
@@ -63,6 +64,19 @@ namespace SistemaDeMoedaEstudantil.Repository.Implementation
         public User FindByID(long id)
         {
             return _context.User.SingleOrDefault(p => p.Id.Equals(id));
+        }
+
+        public User FindByEmail(string email)
+        {
+            var user = _context.User.SingleOrDefault(p => p.Email.Equals(email));
+
+            var userByEmail = new User();
+            userByEmail.Email = user.Email;
+            userByEmail.Senha = user.Senha;
+            userByEmail.UserType = user.UserType;
+            userByEmail.Id = user.Id;
+
+            return userByEmail;
         }
 
         public User Update(User user)

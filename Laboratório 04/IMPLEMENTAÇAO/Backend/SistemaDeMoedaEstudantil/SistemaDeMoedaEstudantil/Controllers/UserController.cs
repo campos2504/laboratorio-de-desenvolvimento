@@ -43,6 +43,19 @@ namespace SistemaDeMoedaEstudantil.Controllers
             return Ok(user);
         }
 
+        [HttpGet("email/{email}")]
+        public IActionResult Get(string email)
+        {
+            var user = _userBusiness.FindByEmail(email);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
+        }
+
         [HttpPost]
         public IActionResult Post([FromBody] User user)
         {

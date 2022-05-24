@@ -37,6 +37,12 @@ namespace SistemaDeMoedaEstudantil.Business
             return _repository.FindByID(id);
         }
 
+        public User FindByEmail(string email)
+        {
+
+            return _repository.FindByEmail(email);
+        }
+
         public User Update(User user)
         {
 

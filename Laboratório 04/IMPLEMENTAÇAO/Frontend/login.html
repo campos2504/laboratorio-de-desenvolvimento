@@ -47,7 +47,7 @@
 
             const xhr = new XMLHttpRequest();
 
-            xhr.open('GET', 'https://localhost:44372/api/User/' + renamedData.email, true);
+            xhr.open('GET', 'https://localhost:44372/api/user/email/' + renamedData.email, true);
             xhr.setRequestHeader("Content-type", "application/json");
 
             xhr.onreadystatechange = () => {
@@ -58,7 +58,7 @@
                            console.log(usuario); 
                         if (usuario) {
                             if (usuario.senha == renamedData.senha) {
-                                localStorage.setItem('user', JSON.stringify(usuario.data));
+                                localStorage.setItem('user', JSON.stringify(usuario));
                                 window.location.href = 'EnvioMoeda.html';
                             }else{
                                 alert("senha errada")

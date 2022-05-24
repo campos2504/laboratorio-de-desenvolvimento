@@ -7,6 +7,7 @@ namespace SistemaDeMoedaEstudantil.Business
     {
         User Create(User user);
         User FindByID(long id);
+        User FindByEmail(string email);
         List<User> FindAll();
         User Update(User user);
         void Delete(long id);
