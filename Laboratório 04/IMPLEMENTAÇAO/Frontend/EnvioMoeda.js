@@ -3,6 +3,8 @@ const baseURLprofessor = `https://localhost:44372/api/professor`;
 let alunosCadastrados;
 let alunoSelecionado;
 
+//recupera do localStorage o professor
+let idProfessor = JSON.parse(localStorage.getItem('userProfessor'));
 
 function imprimeAluno() {
 
@@ -18,7 +20,7 @@ function imprimeAluno() {
         alunosCadastrados = data;
         // Montar texto HTML dos módulos
         for (i = 0; i < data.length; i++) {
-  
+          if(data[i].instituicaoEnsinoId == idProfessor.instituicaoEnsinoId)
           strHtml += `
           <option value="${data[i].id}">${data[i].nome}</option>
       `;
@@ -69,14 +71,15 @@ const formMoeda = {
 
 
   const saveProvider = (data) => {
-    for(i = 0; i < alunosCadastrados.length; i++){
 
+    for(i = 0; i < alunosCadastrados.length; i++){
       if(data.aluno == alunosCadastrados[i].id){
         alunoSelecionado = alunosCadastrados[i];
       }
     };
-    let contaProfessorId = 2;
+    let contaProfessorId = idProfessor.id;
     let contaAlunoId = alunoSelecionado.contaId;
+    console.log(contaAlunoId);
 
     let valorMoeda = parseInt(data.valorTranferencia);
 
@@ -86,6 +89,7 @@ const formMoeda = {
       contaProfessorId: contaProfessorId,
     };
 
+    console.log(renamedData);
     const xhrMoeda = new XMLHttpRequest();
   
     xhrMoeda.open('POST', 'https://localhost:44372/api/extrato', true);
@@ -109,10 +113,8 @@ const formMoeda = {
 
   function imprimeExtratoProfessor() {
 
+    let extratoAluno = ''.concat('https://localhost:44372/api/extrato/extratoConta', '/', idProfessor.contaId);
 
-
-    let extratoAluno = `https://localhost:44372/api/extrato/extratoConta/2`;
-  
     fetch(extratoAluno, {
     }).then(result => result.json())
   

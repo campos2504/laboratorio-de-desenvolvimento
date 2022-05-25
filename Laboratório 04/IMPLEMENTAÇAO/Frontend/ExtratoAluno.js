@@ -1,6 +1,10 @@
+//recupera do localStorage o aluno
+let idAluno = JSON.parse(localStorage.getItem('userAluno'));
+
 function imprimeExtratoAluno() {
 
-  let extratoAluno = `https://localhost:44372/api/extrato/extratoConta/1`;
+  let extratoAluno = ''.concat('https://localhost:44372/api/extrato/extratoConta', '/', idAluno.contaId);
+  console.log(extratoAluno);
 
   fetch(extratoAluno, {
   }).then(result => result.json())

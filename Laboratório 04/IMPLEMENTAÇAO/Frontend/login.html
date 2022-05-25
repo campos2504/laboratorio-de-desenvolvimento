@@ -58,21 +58,19 @@
                         console.log(usuario);
                         if (usuario) {
                             if (usuario.senha == renamedData.senha) {
-                                localStorage.setItem('user', JSON.stringify(usuario));
-                                switch (usuario.usertype) {
-                                    case 0:
-                                        window.location.href = 'EnvioMoeda.html';
-                                        break;
-                                    case 1:
-                                        window.location.href = 'ExtratoAluno.html';
-                                        break;
-                                    case 2:
-                                        window.location.href = 'CadastroVantagens.html';
-                                        break;
-
-
+                                /*localStorage.setItem('user', JSON.stringify(usuario));*/
+                                let userType = usuario.userType;
+                                if(userType == 0){
+                                    localStorage.setItem('userProfessor', JSON.stringify(usuario));
+                                    window.location.href = 'EnvioMoeda.html';
+                                }else if(userType == 2){
+                                    localStorage.setItem('userAluno', JSON.stringify(usuario));
+                                    window.location.href = 'ExtratoAluno.html';
+                                }else if(userType == 1){
+                                    localStorage.setItem('userEmpresa', JSON.stringify(usuario));
+                                    window.location.href = 'CadastroVantagens.html';
                                 }
-                                window.location.href = 'EnvioMoeda.html';
+                                /*window.location.href = 'EnvioMoeda.html';*/
                             } else {
                                 alert("senha errada")
 
