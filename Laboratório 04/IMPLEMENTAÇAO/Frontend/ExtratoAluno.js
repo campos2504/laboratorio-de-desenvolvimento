@@ -21,7 +21,7 @@ function imprimeExtratoAluno() {
 
     <tr>
      <td>${data[i].valor}</td>
-      <td>${data[i].transacaoType}</td>
+      <td>${data[i].transacaoType  ? "ENVIADO" : "RECEBIDO"} </td>
 `;
 
       };

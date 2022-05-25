@@ -131,7 +131,7 @@ const formMoeda = {
   
         <tr>
         <td>${data[i].valor}</td>
-        <td>${data[0].transacaoType ? "Enviado" : "Recebido"}</td>
+        <td>${data[0].transacaoType ? "ENVIADO" : "RECEBIDO"}</td>
   `;
 
         };
