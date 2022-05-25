@@ -70,13 +70,50 @@ namespace SistemaDeMoedaEstudantil.Repository.Implementation
         {
             var user = _context.User.SingleOrDefault(p => p.Email.Equals(email));
 
-            var userByEmail = new User();
-            userByEmail.Email = user.Email;
-            userByEmail.Senha = user.Senha;
-            userByEmail.UserType = user.UserType;
-            userByEmail.Id = user.Id;
+            if(user.UserType == UserType.PROFESSOR)
+            {
+                Professor userProf = _context.Professor.SingleOrDefault(p => p.Email.Equals(email));
 
-            return userByEmail;
+                Professor userByEmail = new Professor();
+                userByEmail.Email = userProf.Email;
+                userByEmail.Senha = userProf.Senha;
+                userByEmail.UserType = userProf.UserType;
+                userByEmail.Id = userProf.Id;
+                userByEmail.ContaId = userProf.ContaId;
+                userByEmail.InstituicaoEnsinoId = userProf.InstituicaoEnsinoId;
+
+                return userByEmail;
+            }
+
+            if (user.UserType == UserType.EMPRESAPARCEIRA)
+            {
+                EmpresaParceira userEmpresa = _context.EmpresaParceira.SingleOrDefault(p => p.Email.Equals(email));
+
+                EmpresaParceira userByEmail = new EmpresaParceira();
+                userByEmail.Email = userEmpresa.Email;
+                userByEmail.Senha = userEmpresa.Senha;
+                userByEmail.UserType = userEmpresa.UserType;
+                userByEmail.Id = userEmpresa.Id;               
+
+                return userByEmail;
+            }
+
+            if (user.UserType == UserType.ALUNO)
+            {
+                Aluno userAluno = _context.Aluno.SingleOrDefault(p => p.Email.Equals(email));
+
+                Aluno userByEmail = new Aluno();
+                userByEmail.Email = userAluno.Email;
+                userByEmail.Senha = userAluno.Senha;
+                userByEmail.UserType = userAluno.UserType;
+                userByEmail.Id = userAluno.Id;
+                userByEmail.ContaId = userAluno.ContaId;
+
+                return userByEmail;
+            }
+
+            return user;
+
         }
 
         public User Update(User user)
