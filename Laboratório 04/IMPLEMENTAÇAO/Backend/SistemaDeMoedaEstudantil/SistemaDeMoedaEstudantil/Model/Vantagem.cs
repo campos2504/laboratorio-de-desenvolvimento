@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SistemaDeMoedaEstudantil.Model
 {
@@ -12,5 +13,6 @@ namespace SistemaDeMoedaEstudantil.Model
         public string ImagemSrc { get; set; }
         public long EmpresaParceiraId { get; set; }
         public virtual EmpresaParceira EmpresaParceira { get; set; }
+        public ICollection<VantagemUser> VantagemUser { get; set; }
     }
 }

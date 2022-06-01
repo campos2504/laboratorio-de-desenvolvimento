@@ -7,20 +7,20 @@ using System.Linq;
 
 namespace SistemaDeMoedaEstudantil.Repository.Implementation
 {
-    public class AlunoRepositoryImplementation : IAlunoRepository
+    public class VantagemUserRepositoryImplementation : IVantagemUserRepository
     {
         private SistemaMoedaEstudantilContext _context;
 
-        public AlunoRepositoryImplementation(SistemaMoedaEstudantilContext context)
+        public VantagemUserRepositoryImplementation(SistemaMoedaEstudantilContext context)
         {
             _context = context;
         }
 
-        public Aluno Create(Aluno aluno)
+        public VantagemUser Create(VantagemUser vantagemUser)
         {
             try
             {
-                _context.Add(aluno);
+                _context.Add(vantagemUser);
                 _context.SaveChanges();
             }
             catch (Exception ex)
@@ -29,18 +29,18 @@ namespace SistemaDeMoedaEstudantil.Repository.Implementation
                 throw ex;
             }
 
-            return aluno;
+            return vantagemUser;
         }
 
         public void Delete(long id)
         {
-            var result = _context.Aluno.SingleOrDefault(p => p.Id.Equals(id));
+            var result = _context.VantagemUser.SingleOrDefault(p => p.Id.Equals(id));
 
             if (result != null)
             {
                 try
                 {
-                    _context.Aluno.Remove(result);
+                    _context.VantagemUser.Remove(result);
                     _context.SaveChanges();
                 }
                 catch (Exception)
@@ -53,35 +53,30 @@ namespace SistemaDeMoedaEstudantil.Repository.Implementation
 
         public bool Exists(long id)
         {
-            return _context.Aluno.Any(p => p.Id.Equals(id));
+            return _context.VantagemUser.Any(p => p.Id.Equals(id));
         }
 
-        public List<Aluno> FindAll()
+        public List<VantagemUser> FindAll()
         {
-            return _context.Aluno.Include(p => p.Conta).Include(p => p.InstituicaoEnsino).ToList();
+            return _context.VantagemUser.Include(p => p.Aluno).Include(p => p.Vantagem).ToList();
         }
 
-        public Aluno FindByID(long id)
+        public VantagemUser FindByID(long id)
         {
-            return _context.Aluno.Include(p => p.Conta).SingleOrDefault(p => p.Id.Equals(id));
+            return _context.VantagemUser.Include(p => p.Aluno).Include(p => p.Vantagem).SingleOrDefault(p => p.Id.Equals(id));
         }
 
-        public List<Aluno> GetAlunoIe(long ie)
+        public VantagemUser Update(VantagemUser vantagemUser)
         {
-            return _context.Aluno.Where(p => p.InstituicaoEnsinoId.Equals(ie)).ToList();
-        }
+            if (!Exists(vantagemUser.Id)) return null;
 
-        public Aluno Update(Aluno aluno)
-        {
-            if (!Exists(aluno.Id)) return null;
-
-            var result = _context.Aluno.SingleOrDefault(p => p.Id.Equals(aluno.Id));
+            var result = _context.VantagemUser.SingleOrDefault(p => p.Id.Equals(vantagemUser.Id));
 
             if (result != null)
             {
                 try
                 {
-                    _context.Entry(result).CurrentValues.SetValues(aluno);
+                    _context.Entry(result).CurrentValues.SetValues(vantagemUser);
                     _context.SaveChanges();
                 }
                 catch (Exception)
@@ -90,7 +85,7 @@ namespace SistemaDeMoedaEstudantil.Repository.Implementation
                     throw;
                 }
             }
-            return aluno;
+            return vantagemUser;
         }
     }
 }

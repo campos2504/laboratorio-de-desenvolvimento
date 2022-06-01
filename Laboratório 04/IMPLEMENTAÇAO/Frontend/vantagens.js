@@ -13,6 +13,9 @@ const baseURL = `https://localhost:44372/api/vantagem`;
  * Imprime na tela os módulos já cadastrados.
  */
 function imprimeDados() {
+
+  let idEmpresa = JSON.parse(localStorage.getItem('userEmpresa'));
+
   fetch(baseURL, {
   }).then(result => result.json())
     .then((data) => {
@@ -22,7 +25,7 @@ function imprimeDados() {
       console.log(data);
       // Montar texto HTML dos módulos
       for (i = 0; i < data.length; i++) {
-
+        
         strHtml += `
         <div class="col-12 col-md-4 my-2">
           <div class="position-relative">            
@@ -168,15 +171,18 @@ function manipularReader(readerEvt) {
  * Início - Inclusão de novo módulo na base de dados.
  */
 const saveProviderModulo = (data) => {
+  let idEmpresa = JSON.parse(localStorage.getItem('userEmpresa'));
     let valor = parseInt(data.valorVantagem);
   const renamedData = {
     descricao: data.descricaoModulo,
     imagem: imagemNomeModulo,
     imagemUpload: imageBase64Modulo,
     valor: valor,
-    empresaParceiraId: 2
+    empresaParceiraId: idEmpresa.id
   }
   const xhr = new XMLHttpRequest();
+  console.log(renamedData);
+  alert("teste");
 
   xhr.open('POST', 'https://localhost:44372/api/vantagem', true);
   xhr.setRequestHeader("Content-type", "application/json");

@@ -77,7 +77,7 @@ const formMoeda = {
         alunoSelecionado = alunosCadastrados[i];
       }
     };
-    let contaProfessorId = idProfessor.id;
+    let contaProfessorId = idProfessor.contaId;
     let contaAlunoId = alunoSelecionado.contaId;
     console.log(contaAlunoId);
 
@@ -114,13 +114,13 @@ const formMoeda = {
   function imprimeExtratoProfessor() {
 
     let extratoAluno = ''.concat('https://localhost:44372/api/extrato/extratoConta', '/', idProfessor.contaId);
-
+    console.log(extratoAluno);
     fetch(extratoAluno, {
     }).then(result => result.json())
   
       .then((data) => {
         console.log(data);
-        document.getElementById('saldo').value = data[0].conta.saldo;
+        document.getElementById('saldoProf').value = data[0].conta.saldo;
         let tela = document.getElementById('content');
   
         let strHtml = "";

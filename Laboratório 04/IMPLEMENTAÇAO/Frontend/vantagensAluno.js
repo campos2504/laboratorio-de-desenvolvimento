@@ -7,6 +7,8 @@ let imageBase64ModuloUpdate;
 let binaryString;
 let binaryStringUpdate;
 let idUpdate;
+let saldoAtual;
+let valorItemEscolhido;
 const baseURL = `https://localhost:44372/api/vantagem`;
 
 /***
@@ -47,8 +49,8 @@ function imprimeDados() {
                   </button>
                 </div>
                   <div class="card-text">
-                  <a href="" onclick="selecionarModulo(${data[i].id})">
-                    <h1 class="linkModulo">${data[i].descricao}</h1></a>
+                  <a onclick="selecionarVantagem(${data[i].id})">
+                    <h1 class="linkModulo">${data[i].descricao}</h1>
                     <h1 class="linkModulo">${data[i].valor}</h1></a>
                   </div>
                 </div>            
@@ -391,11 +393,78 @@ function manipularReaderUpdate(readerEvt) {
 /**
  * Salvar no localStorage o id do módulo escolhido.
  */
-function selecionarModulo(event) {
 
-  console.log(event);
+function selecionarVantagem(event) {
+  
+  localStorage.setItem('vantagemEscolhida', JSON.stringify({ event }));
+  
+  let saldoAluno = verificaSaldoAluno();
+  let valorItem = verificaValorItem();  
 
-  if (event) {
-    localStorage.setItem('vantagemEscolhida', JSON.stringify({ event }));
-  };
+  if(saldoAluno < valorItem){
+    alert("Saldo Insuficiente. Seu saldo é: " + saldoAluno);
+  }else{
+    saveVantagem();
+  }
+  
 };
+
+
+function verificaSaldoAluno(){
+
+  let idAluno = JSON.parse(localStorage.getItem('userAluno'));
+  let saldoAluno = ''.concat('https://localhost:44372/api/aluno', '/', idAluno.id);  
+
+  let request = new XMLHttpRequest();
+  request.open('GET', saldoAluno, false);
+  request.send();
+  const dados = request.responseText;
+  var objeto = JSON.parse(dados);
+  saldoAtual = objeto.conta.saldo;
+  return saldoAtual;  
+}
+
+function verificaValorItem(){
+
+  let idVantagem = JSON.parse(localStorage.getItem('vantagemEscolhida'));
+  let saldoAluno = ''.concat('https://localhost:44372/api/vantagem', '/', idVantagem.event);  
+
+  let request = new XMLHttpRequest();
+  request.open('GET', saldoAluno, false);
+  request.send();
+  const dados = request.responseText;
+  var objeto = JSON.parse(dados);
+  valorItemEscolhido = objeto.valor;
+
+  return valorItemEscolhido;  
+}
+
+
+let idAluno = JSON.parse(localStorage.getItem('userAluno'));
+let idVantagem = JSON.parse(localStorage.getItem('vantagemEscolhida'));
+
+function saveVantagem() {
+
+    let idVantagemSave = JSON.parse(localStorage.getItem('vantagemEscolhida'));
+    let idAlunoSave = JSON.parse(localStorage.getItem('userAluno'));
+
+    const renamedData = {
+        vantagemId: idVantagemSave.event,
+        alunoId: idAlunoSave.id
+    };
+    
+    const xhrMoeda = new XMLHttpRequest();
+    console.log(renamedData);
+    xhrMoeda.open('POST', 'https://localhost:44372/api/vantagemUser', true);
+    xhrMoeda.setRequestHeader("Content-type", "application/json");
+    xhrMoeda.onreadystatechange = () => {
+        if (xhrMoeda.readyState == 4) {
+            if (xhrMoeda.status == 200) {
+                console.log(xhrMoeda.responseText);
+                /*window.location.reload();*/
+                window.location.href = "listaVantagemAdquiridaAluno.html";
+            }
+        }
+    }
+    xhrMoeda.send(JSON.stringify(renamedData));
+}

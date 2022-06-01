@@ -25,6 +25,7 @@ namespace SistemaDeMoedaEstudantil.Repositorys
         public DbSet<Conta> Conta { get; set; }
         public DbSet<Extrato> Extrato { get; set; }
         public DbSet<Vantagem> Vantagem { get; set; }
+        public DbSet<VantagemUser> VantagemUser { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

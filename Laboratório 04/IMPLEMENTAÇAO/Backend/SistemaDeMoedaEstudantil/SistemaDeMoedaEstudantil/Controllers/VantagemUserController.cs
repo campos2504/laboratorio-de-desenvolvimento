@@ -13,38 +13,38 @@ namespace SistemaDeMoedaEstudantil.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProfessorController : ControllerBase
+    public class VantagemUserController : ControllerBase
     {
-        private readonly IProfessorBusiness _professorBusiness;
+        private IVantagemUserBusiness _vantagemUserBusiness;
 
-        public ProfessorController(IProfessorBusiness professorBusiness)
+        public VantagemUserController(IVantagemUserBusiness vantagemUserBusiness)
         {
-            _professorBusiness = professorBusiness;
+            _vantagemUserBusiness = vantagemUserBusiness;
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            List<Professor> professor = _professorBusiness.FindAll();
+            List<VantagemUser> vantagemUser = _vantagemUserBusiness.FindAll();
             
-            return Ok(professor);
+            return Ok(vantagemUser);
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(long id)
         {
-            var professor = _professorBusiness.FindByID(id);
+            var vantagemUser = _vantagemUserBusiness.FindByID(id);
 
-            if (professor == null)
+            if (vantagemUser == null)
             {
                 return NotFound();
             }
 
-            return Ok(professor);
+            return Ok(vantagemUser);
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Professor professor)
+        public IActionResult Post([FromBody] VantagemUser vantagemUser)
         {
             if (!ModelState.IsValid)
             {
@@ -57,13 +57,13 @@ namespace SistemaDeMoedaEstudantil.Controllers
                 });
             }
 
-            if (professor == null) return BadRequest();
+            if (vantagemUser == null) return BadRequest();
 
-            return Ok(_professorBusiness.Create(professor));
+            return Ok(_vantagemUserBusiness.Create(vantagemUser));
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Professor professor)
+        public IActionResult Put([FromBody] VantagemUser vantagemUser)
         {
             if (!ModelState.IsValid)
             {
@@ -76,16 +76,16 @@ namespace SistemaDeMoedaEstudantil.Controllers
                 });
             }
 
-            if (professor == null) return BadRequest();
+            if (vantagemUser == null) return BadRequest();
 
-            return Ok(_professorBusiness.Update(professor));
+            return Ok(_vantagemUserBusiness.Update(vantagemUser));
 
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            _professorBusiness.Delete(id);
+            _vantagemUserBusiness.Delete(id);
 
             return NoContent();
         }

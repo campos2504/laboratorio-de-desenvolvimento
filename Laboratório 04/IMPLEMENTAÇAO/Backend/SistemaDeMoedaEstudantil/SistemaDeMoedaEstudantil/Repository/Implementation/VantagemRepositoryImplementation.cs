@@ -58,9 +58,8 @@ namespace SistemaDeMoedaEstudantil.Repository.Implementation
 
         public List<Vantagem> FindAll()
         {
-            var result = _context.Vantagem.ToList();
+            return _context.Vantagem.ToList();
 
-            return result;
         }
 
         public Vantagem FindByID(long id)

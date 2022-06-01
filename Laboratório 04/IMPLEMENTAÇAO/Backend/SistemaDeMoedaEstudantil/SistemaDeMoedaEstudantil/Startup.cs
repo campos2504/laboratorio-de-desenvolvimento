@@ -38,6 +38,11 @@ namespace SistemaDeMoedaEstudantil
 
             services.AddControllers();
 
+            services.AddControllersWithViews()
+            .AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
             services.AddCors(oprtions => oprtions.AddDefaultPolicy(builder => {
                 builder.AllowAnyOrigin()
                 .AllowAnyMethod()
@@ -72,6 +77,8 @@ namespace SistemaDeMoedaEstudantil
             services.AddScoped<IUserBusiness, UserBusinessImplementation>();
             services.AddScoped<IVantagemRepository, VantagemRepositoryImplementation>();
             services.AddScoped<IVantagemBusiness, VantagemBusinessImplementation>();
+            services.AddScoped<IVantagemUserRepository, VantagemUserRepositoryImplementation>();
+            services.AddScoped<IVantagemUserBusiness, VantagemUserBusinessImplementation>();
 
             services.AddSingleton(mapper);
 

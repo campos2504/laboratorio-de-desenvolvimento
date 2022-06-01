@@ -68,7 +68,10 @@ namespace SistemaDeMoedaEstudantil.Repository.Implementation
 
         public List<Extrato> GetExtratoConta(long id)
         {
-            return _context.Extrato.Where(p => p.ContaId.Equals(id)).Include(p => p.Conta).ToList();
+            var resultExtratoProf = _context.Extrato.Where(p => p.ContaId.Equals(id)).Include(p => p.Conta).ToList();
+            return resultExtratoProf;
+
+
         }
 
         public Extrato Update(Extrato extrato)
