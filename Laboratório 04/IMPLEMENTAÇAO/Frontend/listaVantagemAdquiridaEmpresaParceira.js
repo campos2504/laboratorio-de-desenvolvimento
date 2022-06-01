@@ -13,7 +13,7 @@ function imprimeVantagensAdquiridasAlunos() {
             let strHtml = "";
             // Montar texto HTML dos módulos
 
-            for (i = 0; i < data.length; i++) {
+            for (i = 8; i < data.length; i++) {
                 
                 strHtml += `
   
